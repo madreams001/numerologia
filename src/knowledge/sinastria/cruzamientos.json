@@ -1,0 +1,32 @@
+{
+  "descripcion": "Análisis de compatibilidad entre dos personas mediante el cruzamiento de sus números y mapas astrales",
+  "metodos": [
+    {
+      "nombre": "Cruzamiento Numerológico",
+      "descripcion": "Compara los números clave de dos personas (Vida, Expresión, Deseo del Alma)",
+      "cruces": [
+        { "numero_a": "vida", "numero_b": "vida", "significado": "Compatibilidad fundamental — cómo se llevan en lo esencial" },
+        { "numero_a": "vida", "numero_b": "expresion", "significado": "Cómo tu esencia interactúa con tu forma de expresarte" },
+        { "numero_a": "expresion", "numero_b": "expresion", "significado": "Compatibilidad en comunicación y expresión" },
+        { "numero_a": "deseoAlma", "numero_b": "deseoAlma", "significado": "Conexión emocional profunda — deseos del alma" },
+        { "numero_a": "personalidad", "numero_b": "personalidad", "significado": "Atracción inicial y percepción mutua" }
+      ]
+    },
+    {
+      "nombre": "Cruzamiento Astrológico",
+      "descripcion": "Compara las posiciones planetarias de dos cartas natales",
+      "cruces": [
+        { "planeta_a": "Sol", "planeta_b": "Sol", "significado": "Identidad y vitalidad — cómo brillan juntos" },
+        { "planeta_a": "Sol", "planeta_b": "Luna", "significado": "Equilibrio masculino/femenino — sol y luna" },
+        { "planeta_a": "Venus", "planeta_b": "Marte", "significado": "Atracción romanticosexual — pasión" },
+        { "planeta_a": "Luna", "planeta_b": "Luna", "significado": "Conexión emocional — necesidades interiores" },
+        { "planeta_a": "Sol", "planeta_b": "Ascendente", "significado": "Cómo te ve vs cómo te sientes" }
+      ]
+    }
+  ],
+  "interpretaciones": {
+    "armonia": "Los números o posiciones se complementan naturalmente. Fluye sin esfuerzo.",
+    "desafio": "Los números o posiciones crean tensión. Requiere trabajo consciente pero genera crecimiento.",
+    "neutro": "Sin influencia fuerte en ninguna dirección. La relación se define por otros factores."
+  }
+}

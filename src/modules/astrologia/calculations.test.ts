@@ -2,8 +2,9 @@
 /**
  * Astrology Calculations Tests
  */
+/// <reference types="vitest" />
 
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import {
   calculateNatalChart,
   calculateTransits,
