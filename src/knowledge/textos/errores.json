@@ -1,0 +1,17 @@
+{
+  "errores": {
+    "nombre_vacio": "Por favor, ingresa tu nombre completo.",
+    "fecha_invalida": "La fecha de nacimiento no es válida.",
+    "fecha_futura": "La fecha de nacimiento no puede ser en el futuro.",
+    "hora_invalida": "La hora ingresada no es válida.",
+    "lugar_requerido": "Para cálculos astrológicos, se requiere el lugar de nacimiento.",
+    "error_calculo": "Hubo un error al realizar los cálculos. Por favor, intenta nuevamente.",
+    "error_servidor": "Error de conexión. Por favor, verifica tu conexión a internet."
+  },
+  "ayuda": {
+    "nombre": "Ingresa tu nombre completo tal como aparece en tu acta de nacimiento.",
+    "fecha": "Selecciona tu fecha de nacimiento completa (día, mes y año).",
+    "hora": "La hora de nacimiento es opcional pero mejora la precisión de los cálculos astrológicos.",
+    "lugar": "El lugar de nacimiento es necesario para calcular el mapa astral exacto."
+  }
+}

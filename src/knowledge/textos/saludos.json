@@ -1,0 +1,16 @@
+{
+  "saludos": {
+    "bienvenida": "¡Bienvenido a tu calculadora de Numerología y Astrología!",
+    "instruccion": "Ingresa tu nombre completo y fecha de nacimiento para comenzar.",
+    "resultado": "Aquí están tus resultados:",
+    "numerologia": "Numerología",
+    "astrologia": "Astrología",
+    "sinastria": "Sinastria"
+  },
+  "navegacion": {
+    "resultados": "Resultados",
+    "nuevaconsulta": "Nueva consulta",
+    "guardar": "Guardar resultado",
+    "compartir": "Compartir"
+  }
+}

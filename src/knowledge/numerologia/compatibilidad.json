@@ -1,0 +1,63 @@
+{
+  "compatibilidad": {
+    "1": {
+      "mejores": [3, 5, 6, 9],
+      "buenos": [2, 7],
+      "desafiantes": [4, 8],
+      "evitar": []
+    },
+    "2": {
+      "mejores": [1, 4, 6, 8],
+      "buenos": [3, 7, 9],
+      "desafiantes": [5],
+      "evitar": []
+    },
+    "3": {
+      "mejores": [1, 5, 7, 9],
+      "buenos": [2, 6],
+      "desafiantes": [4, 8],
+      "evitar": []
+    },
+    "4": {
+      "mejores": [2, 6, 7, 8],
+      "buenos": [1, 3, 5],
+      "desafiantes": [9],
+      "evitar": []
+    },
+    "5": {
+      "mejores": [1, 3, 7, 9],
+      "buenos": [4, 6],
+      "desafiantes": [2, 8],
+      "evitar": []
+    },
+    "6": {
+      "mejores": [1, 2, 4, 8],
+      "buenos": [3, 5, 7],
+      "desafiantes": [9],
+      "evitar": []
+    },
+    "7": {
+      "mejores": [3, 4, 5, 9],
+      "buenos": [1, 2, 6],
+      "desafiantes": [8],
+      "evitar": []
+    },
+    "8": {
+      "mejores": [2, 4, 6],
+      "buenos": [1, 3, 7],
+      "desafiantes": [5, 9],
+      "evitar": []
+    },
+    "9": {
+      "mejores": [1, 3, 5, 7],
+      "buenos": [2, 4, 6],
+      "desafiantes": [8],
+      "evitar": []
+    }
+  },
+  "notas": [
+    "La compatibilidad numérica es solo una guía. Las relaciones requieren trabajo y compromiso mutuo.",
+    "Los números maestros (11, 22, 33) tienen compatibilidades especiales.",
+    "Esta tabla es un punto de partida para el análisis, no una sentencia definitiva."
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "numeros": {
+    "1": {
+      "nombre": "El Líder",
+      "significado": "Independencia, originalidad, ambición, individualidad. Persona emprendedora, pionera, con capacidad de liderazgo.",
+      "elemento": "Fuego",
+      "planeta": "Sol",
+      "positive": ["Líder", "Original", "Independiente", "Valiente", "Determinado"],
+      "negative": "Dominante, impaciente, egoísta"
+    },
+    "2": {
+      "nombre": "El Cooperador",
+      "significado": "Diplomacia, sensibilidad, paciencia, partnership. Persona cooperadora, empática, orientada a relaciones.",
+      "elemento": "Agua",
+      "planeta": "Luna",
+      "positive": ["Diplomático", "Sensible", "Paciente", "Cooperador", "Empático"],
+      "negative": "Indeciso, influenciable, sensitivo"
+    },
+    "3": {
+      "nombre": "El Comunicador",
+      "significado": "Expresión artística, optimismo, imaginación, socialización. Persona creativa, sociable, expresiva.",
+      "elemento": "Aire",
+      "planeta": "Júpiter",
+      "positive": ["Creativo", "Optimista", "Sociable", "Expresivo", "Imaginativo"],
+      "negative": "Superficial, disperso, irresponsable"
+    },
+    "4": {
+      "nombre": "El Constructor",
+      "significado": "Estabilidad, practicidad, disciplina, trabajo duro. Persona confiable, metódica, organizada.",
+      "elemento": "Tierra",
+      "planeta": "Urano",
+      "positive": ["Práctico", "Confiable", "Organizado", "Trabajador", "Leal"],
+      "negative": "Rígido, terco, limitado"
+    },
+    "5": {
+      "nombre": "El Explorador",
+      "significado": "Libertad, aventura, cambios, versatilidad. Persona adaptable, curiosa, viajera.",
+      "elemento": "Aire",
+      "planeta": "Mercurio",
+      "positive": ["Adaptable", "Versátil", "Curioso", "Aventurero", "Libre"],
+      "negative": "Inconstante, irresponsable, temerario"
+    },
+    "6": {
+      "nombre": "El Cuidador",
+      "significado": "Amor, familia, responsabilidad, armonía. Persona amorosa, protectora, servicial.",
+      "elemento": "Tierra",
+      "planeta": "Venus",
+      "positive": ["Amoroso", "Responsable", "Protector", "Armonioso", "Servicial"],
+      "negative": "Ansioso, introspectivo, autoritario"
+    },
+    "7": {
+      "nombre": "El Buscador",
+      "significado": "Análisis, introspección, espiritualidad, sabiduría. Persona analítica, reflexiva, espiritual.",
+      "elemento": "Aire",
+      "planeta": "Neptuno",
+      "positive": ["Analítico", "Espiritual", "Reflexivo", "Sabio", "Intuitivo"],
+      "negative": "Distante, escéptico, aislado"
+    },
+    "8": {
+      "nombre": "El Poderoso",
+      "significado": "Éxito material, autoridad, abundancia, logros. Persona ambiciosa, segura, orientada a resultados.",
+      "elemento": "Tierra",
+      "planeta": "Saturno",
+      "positive": ["Ambicioso", "Seguro", "Práctico", "Líder", "Próspero"],
+      "negative": "Autoritario, materialista, impaciente"
+    },
+    "9": {
+      "nombre": "El Humanitario",
+      "significado": "Compasión, idealismo, sabiduría, servicio. Persona compasiva, idealista, generosa.",
+      "elemento": "Aire",
+      "planeta": "Marte",
+      "positive": ["Compasivo", "Idealista", "Generoso", "Sabio", "Humanitario"],
+      "negative": "Escéptico, distante, resentido"
+    },
+    "11": {
+      "nombre": "El Maestro Intuitivo",
+      "significado": "Iluminación, intuición espiritual, inspiración. Número maestro de maestros espirituales y visionarios.",
+      "elemento": "Aire",
+      "planeta": "Neptuno",
+      "positive": ["Espiritual", "Intuitivo", "Inspirador", "Visionario", "Iluminado"],
+      "negative": "Impráctico, confuso, autodestructivo"
+    },
+    "22": {
+      "nombre": "El Maestro Constructor",
+      "significado": "Maestría práctica, construir sueños grandes, logros monumentales. Número maestro de constructores y líderes mundiales.",
+      "elemento": "Tierra",
+      "planeta": "Urano",
+      "positive": ["Visionario", "Práctico", "Líder", "Constructor", "Inspirador"],
+      "negative": "Ambicioso desmedido,Dictador, frustrado"
+    },
+    "33": {
+      "nombre": "El Maestro Maestro",
+      "significado": "Maestría espiritual, sanación, enseñanza. Número maestro de maestros espirituales y sanadores.",
+      "elemento": "Agua",
+      "planeta": "Plutón",
+      "positive": ["Sanador", "Maestro", "Compasivo", "Espiritual", "Inspirador"],
+      "negative": "Autodestructivo, obsesivo, manipulador"
+    }
+  }
+}

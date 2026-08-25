@@ -1,0 +1,44 @@
+{
+  "vida": {
+    "1": "Eres un líder nato con una fuerte individualidad. Tu camino de vida es desarrollar tu independencia y capacidad emprendedora. La soledad no te asusta, la usas para crecer.",
+    "2": "Tu camino se centra en las relaciones y la cooperación. Eres diplomático y sensible, con una gran capacidad para entender a los demás.",
+    "3": "Eres un comunicador nato con don artístico. Tu vida está llena de expresión creativa y socialización. La alegría es tu combustible.",
+    "4": "Tu camino es construir bases sólidas y duraderas. El trabajo disciplinado y la constancia son tus herramientas más poderosas.",
+    "5": "Eres un explorador que necesita libertad y cambio. La aventura y la versatilidad definen tu vida.",
+    "6": "Tu camino es el amor y la familia. La responsabilidad y el servicio a los demás son tu propósito.",
+    "7": "Eres un buscador de verdad y sabiduría. La introspección y el análisis son tu camino hacia la iluminación.",
+    "8": "Tu vida está orientada al éxito material y la abundancia. La ambición y el poder son tus herramientas.",
+    "9": "Eres un humanitario con compasión universal. Tu servicio a la humanidad es tu mayor logro.",
+    "11": "Maestro espiritual con intuición elevada. Tu misión es inspirar y guiar a otros hacia la iluminación.",
+    "22": "Constructor de sueños grandes con capacidad de manifestación. Puedes construir cosas que impactan al mundo.",
+    "33": "Maestro maestro con capacidad de sanación. Tu enseñanza y compasión pueden transformar vidas."
+  },
+  "expresion": {
+    "1": "Expresas tu individualidad a través de la liderazgo y la originalidad. Tu voz es fuerte y directa.",
+    "2": "Te expresas mediante la diplomacia y la sensibilidad. Tu comunicación es sutil y empática.",
+    "3": "Eres un comunicador nato, expresivo y artístico. Las palabras y el arte son tu medio.",
+    "4": "Te expresas con práctica y disciplina. Tu comunicación es clara y metódica.",
+    "5": "Expresas tu versatilidad y curiosidad. Tu voz es dinámica y cambiante.",
+    "6": "Te expresas con amor y cuidado. Tu comunicación es protectora y servicial.",
+    "7": "Expresas sabiduría y análisis. Tu voz es reflexiva y profunda.",
+    "8": "Te expresas con autoridad y poder. Tu comunicación es directa y orientada a resultados.",
+    "9": "Expresas compasión y idealismo. Tu voz es inspiradora y humanitaria.",
+    "11": "Expresas iluminación e intuición. Tu comunicación es espiritual y visionaria.",
+    "22": "Expresas maestría práctica. Tu voz construye y manifiesta sueños.",
+    "33": "Expresas maestría espiritual. Tu enseñanza sana y transforma."
+  },
+  "deseo": {
+    "1": "Deseas independencia y liderazgo. Quieres ser el primero y el mejor.",
+    "2": "Deseas armonía y partnership. Buscas relaciones significativas.",
+    "3": "Deseas expresión creativa y diversión. Quieres brillar socialmente.",
+    "4": "Deseas estabilidad y orden. Buscas construir algo duradero.",
+    "5": "Deseas libertad y aventura. Quieres explorar el mundo.",
+    "6": "Deseas amor y familia. Buscas crear un hogar armonioso.",
+    "7": "Deseas sabiduría y verdad. Buscas comprender el sentido de la vida.",
+    "8": "Deseas éxito y abundancia. Quieres logros materiales.",
+    "9": "Deseas servicio y compasión. Buscas ayudar a la humanidad.",
+    "11": "Deseas iluminación espiritual. Buscas inspirar a otros.",
+    "22": "Deseas construir algo grandioso. Quieres impactar al mundo.",
+    "33": "Deseas sanar y enseñar. Buscas transformar vidas."
+  }
+}
