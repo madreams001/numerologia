@@ -1,0 +1,88 @@
+{
+  "casas": [
+    {
+      "numero": 1,
+      "nombre": "Casa I",
+      "titulo": "Casa del Yo / Ascendente",
+      "significado": "Identidad personal, apariencia física, primera impresión, inicio de vida.",
+      "areas": ["personalidad", "apariencia", "autoconcepto", "iniciativa"]
+    },
+    {
+      "numero": 2,
+      "nombre": "Casa II",
+      "titulo": "Casa de los Recursos",
+      "significado": "Valores materiales, ingresos, posesiones, autoestima.",
+      "areas": ["dinero", "posesiones", "valores", "autoestima"]
+    },
+    {
+      "numero": 3,
+      "nombre": "Casa III",
+      "titulo": "Casa de la Comunicación",
+      "significado": "Comunicación, hermanos, viajes cortos, educación primaria.",
+      "areas": ["comunicación", "hermanos", "viajes", "aprendizaje"]
+    },
+    {
+      "numero": 4,
+      "nombre": "Casa IV",
+      "titulo": "Casa del Hogar / IC",
+      "significado": "Familia, raíces, hogar, emociones internas, padre/madre.",
+      "areas": ["hogar", "familia", "raíces", "emociones"]
+    },
+    {
+      "numero": 5,
+      "nombre": "Casa V",
+      "titulo": "Casa de la Creatividad",
+      "significado": "Creatividad, romance, hijos, placer, hobbies.",
+      "areas": ["creatividad", "romance", "hijos", "placer"]
+    },
+    {
+      "numero": 6,
+      "nombre": "Casa VI",
+      "titulo": "Casa del Trabajo / Salud",
+      "significado": "Trabajo diario, salud, rutinas, servicio, mascotas.",
+      "areas": ["trabajo", "salud", "rutinas", "servicio"]
+    },
+    {
+      "numero": 7,
+      "nombre": "Casa VII",
+      "titulo": "Casa de la Pareja / DC",
+      "significado": "Relaciones de pareja, socios, contratos, el Otro.",
+      "areas": ["pareja", "socios", "contratos", "relaciones"]
+    },
+    {
+      "numero": 8,
+      "nombre": "Casa VIII",
+      "titulo": "Casa de la Transformación",
+      "significado": "Muerte y renacimiento, sexualidad, recursos compartidos, misterios.",
+      "areas": ["transformación", "sexualidad", "recursos compartidos", "ocultismo"]
+    },
+    {
+      "numero": 9,
+      "nombre": "Casa IX",
+      "titulo": "Casa de la Filosofía",
+      "significado": "Filosofía, religión, viajes largos, educación superior, legislación.",
+      "areas": ["filosofía", "religión", "viajes", "educación"]
+    },
+    {
+      "numero": 10,
+      "nombre": "Casa X",
+      "titulo": "Casa de la Carrera / MC",
+      "significado": "Carrera profesional, reputación, logros públicos, autoridad.",
+      "areas": ["carrera", "reputación", "logros", "autoridad"]
+    },
+    {
+      "numero": 11,
+      "nombre": "Casa XI",
+      "titulo": "Casa de los Amigos",
+      "significado": "Amistades, grupos, esperanzas, organización, redes sociales.",
+      "areas": ["amistades", "grupos", "esperanzas", "organizaciones"]
+    },
+    {
+      "numero": 12,
+      "nombre": "Casa XII",
+      "titulo": "Casa del Subconsciente",
+      "significado": "Subconsciente, aislamiento, espiritualidad, enemigos ocultos.",
+      "areas": ["subconsciente", "aislamiento", "espiritualidad", "karma"]
+    }
+  ]
+}

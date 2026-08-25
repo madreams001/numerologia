@@ -1,0 +1,136 @@
+{
+  "signos": [
+    {
+      "nombre": "Aries",
+      "simbolo": "♈",
+      "elemento": "Fuego",
+      "calidad": "Cardinal",
+      "rango": "21 marzo - 19 abril",
+      "ruling_planet": "Marte",
+      "descripcion": "Impulsivo, valiente, pionero. Lidera con pasión y energía pura.",
+      "positivo": "Coraje, iniciativa, entusiasmo",
+      "negativo": "Impaciencia, impulsividad, egoísmo"
+    },
+    {
+      "nombre": "Tauro",
+      "simbolo": "♉",
+      "elemento": "Tierra",
+      "calidad": "Fijo",
+      "rango": "20 abril - 20 mayo",
+      "ruling_planet": "Venus",
+      "descripcion": "Estable, sensual, terco. Busca seguridad y placer material.",
+      "positivo": "Paciencia, lealtad, determinación",
+      "negativo": "Terquedad, materialismo, resistencia al cambio"
+    },
+    {
+      "nombre": "Géminis",
+      "simbolo": "♊",
+      "elemento": "Aire",
+      "calidad": "Mutable",
+      "rango": "21 mayo - 20 junio",
+      "ruling_planet": "Mercurio",
+      "descripcion": "Versátil, curioso, comunicativo. Maestro del intercambio de ideas.",
+      "positivo": "Adaptabilidad, inteligencia, humor",
+      "negativo": "Superficialidad, inconstancia, nerviosismo"
+    },
+    {
+      "nombre": "Cáncer",
+      "simbolo": "♋",
+      "elemento": "Agua",
+      "calidad": "Cardinal",
+      "rango": "21 junio - 22 julio",
+      "ruling_planet": "Luna",
+      "descripcion": "Protector, intuitivo, emocional. El cuidador del zodiaco.",
+      "positivo": "Empatía, memoria, hogar",
+      "negativo": "Mood swings, apego excesivo, victimismo"
+    },
+    {
+      "nombre": "Leo",
+      "simbolo": "♌",
+      "elemento": "Fuego",
+      "calidad": "Fijo",
+      "rango": "23 julio - 22 agosto",
+      "ruling_planet": "Sol",
+      "descripcion": "Creativo, generoso, dramático. Nacido para brillar.",
+      "positivo": "Generosidad, liderazgo, creatividad",
+      "negativo": "Arrogancia, vanidad, necesidad de atención"
+    },
+    {
+      "nombre": "Virgo",
+      "simbolo": "♍",
+      "elemento": "Tierra",
+      "calidad": "Mutable",
+      "rango": "23 agosto - 22 septiembre",
+      "ruling_planet": "Mercurio",
+      "descripcion": "Analítico, meticuloso, servicial. El perfeccionista del zodiaco.",
+      "positivo": "Precisión, dedicación, inteligencia práctica",
+      "negativo": "Perfeccionismo excesivo, crítica, ansiedad"
+    },
+    {
+      "nombre": "Libra",
+      "simbolo": "♎",
+      "elemento": "Aire",
+      "calidad": "Cardinal",
+      "rango": "23 septiembre - 22 octubre",
+      "ruling_planet": "Venus",
+      "descripcion": "Armonioso, diplomático, estético. Busca equilibrio en todo.",
+      "positivo": "Justicia, belleza, cooperación",
+      "negativo": "Indecisión, dependencia, vanidad"
+    },
+    {
+      "nombre": "Escorpio",
+      "simbolo": "♏",
+      "elemento": "Agua",
+      "calidad": "Fijo",
+      "rango": "23 octubre - 21 noviembre",
+      "ruling_planet": "Plutón",
+      "descripcion": "Intenso, estratégico, transformador. Ve más allá de la superficie.",
+      "positivo": "Pasión, resiliencia, profundidad",
+      "negativo": "Celos, posesividad, venganza"
+    },
+    {
+      "nombre": "Sagittarius",
+      "simbolo": "♐",
+      "elemento": "Fuego",
+      "calidad": "Mutable",
+      "rango": "22 noviembre - 21 diciembre",
+      "ruling_planet": "Júpiter",
+      "descripcion": "Aventurero, filosófico, optimista. Busca la verdad y la libertad.",
+      "positivo": "Generosidad, aventura, filosofía",
+      "negativo": "Exceso de confianza, irresponsabilidad, franqueza excesiva"
+    },
+    {
+      "nombre": "Capricornio",
+      "simbolo": "♑",
+      "elemento": "Tierra",
+      "calidad": "Cardinal",
+      "rango": "22 diciembre - 19 enero",
+      "ruling_planet": "Saturno",
+      "descripcion": "Ambicioso, disciplinado, responsable. El construtor a largo plazo.",
+      "positivo": "Disciplina, ambición, madurez",
+      "negativo": "Pessimismo, rigidez, frío emocional"
+    },
+    {
+      "nombre": "Acuario",
+      "simbolo": "♒",
+      "elemento": "Aire",
+      "calidad": "Fijo",
+      "rango": "20 enero - 18 febrero",
+      "ruling_planet": "Urano",
+      "descripcion": "Innovador, humanitario, independiente. El visionario del zodiaco.",
+      "positivo": "Originalidad, humanismo, apertura mental",
+      "negativo": "Distanciamiento, rebeldía sin causa, inconsistencia"
+    },
+    {
+      "nombre": "Piscis",
+      "simbolo": "♓",
+      "elemento": "Agua",
+      "calidad": "Mutable",
+      "rango": "19 febrero - 20 marzo",
+      "ruling_planet": "Neptuno",
+      "descripcion": "Intuitivo, compasivo, soñador. Absorbe las emociones del mundo.",
+      "positivo": "Compasión, intuición, creatividad",
+      "negativo": "Evación, sacrificio excesivo, confusión"
+    }
+  ]
+}

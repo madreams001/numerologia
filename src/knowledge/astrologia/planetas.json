@@ -1,0 +1,114 @@
+{
+  "planetas": [
+    {
+      "nombre": "Sol",
+      "ingles": "Sun",
+      "simbolo": "☉",
+      "significado": "Ego, identidad central, vitalidad, propósito de vida",
+      "ciclo": "~1 año (recorre todo el zodiaco en 1 año)",
+      "signo_domicilio": ["Leo"],
+      "exaltacion": ["Aries"],
+      "caida": ["Libra"],
+      "detrimento": ["Acuario"]
+    },
+    {
+      "nombre": "Luna",
+      "ingles": "Moon",
+      "simbolo": "☽",
+      "significado": "Emociones, instintos, necesidades básicas, inconsciente",
+      "ciclo": "~28 días (recorre un signo cada 2.5 días)",
+      "signo_domicilio": ["Cáncer"],
+      "exaltacion": ["Tauro"],
+      "caida": ["Escorpio"],
+      "detrimento": ["Capricornio"]
+    },
+    {
+      "nombre": "Mercurio",
+      "ingles": "Mercury",
+      "simbolo": "☿",
+      "significado": "Comunicación, intelecto, pensamiento lógico, comercio",
+      "ciclo": "~1 año (retrograda 3-4 veces por año)",
+      "signo_domicilio": ["Géminis", "Virgo"],
+      "exaltacion": ["Virgo"],
+      "caida": ["Piscis"],
+      "detrimento": ["Sagittarius"]
+    },
+    {
+      "nombre": "Venus",
+      "ingles": "Venus",
+      "simbolo": "♀",
+      "significado": "Amor, belleza, armonía, valores, placer",
+      "ciclo": "~1 año (recorre un signo cada 25 días)",
+      "signo_domicilio": ["Tauro", "Libra"],
+      "exaltacion": ["Piscis"],
+      "caida": ["Virgo"],
+      "detrimento": ["Aries", "Escorpio"]
+    },
+    {
+      "nombre": "Marte",
+      "ingles": "Mars",
+      "simbolo": "♂",
+      "significado": "Acción, energía, deseo, agresión, coraje",
+      "ciclo": "~2 años (retrograda cada 2 años)",
+      "signo_domicilio": ["Aries", "Escorpio"],
+      "exaltacion": ["Capricornio"],
+      "caida": ["Cáncer"],
+      "detrimento": ["Tauro", "Libra"]
+    },
+    {
+      "nombre": "Júpiter",
+      "ingles": "Jupiter",
+      "simbolo": "♃",
+      "significado": "Expansión, abundancia, filosofía, suerte, educación",
+      "ciclo": "~12 años (recorre un signo cada 1 año)",
+      "signo_domicilio": ["Sagittarius", "Piscis"],
+      "exaltacion": ["Cáncer"],
+      "caida": ["Capricornio"],
+      "detrimento": ["Géminis", "Virgo"]
+    },
+    {
+      "nombre": "Saturno",
+      "ingles": "Saturn",
+      "simbolo": "♄",
+      "significado": "Responsabilidad, disciplina, restricción, karma, madurez",
+      "ciclo": "~29.5 años (recorre un signo cada 2.5 años)",
+      "signo_domicilio": ["Capricornio", "Acuario"],
+      "exaltacion": ["Libra"],
+      "caida": ["Aries"],
+      "detrimento": ["Cáncer", "Leo"]
+    },
+    {
+      "nombre": "Urano",
+      "ingles": "Uranus",
+      "simbolo": "♅",
+      "significado": "Revolución, innovación, libertad, cambio repentino",
+      "ciclo": "~84 años (recorre un signo cada 7 años)",
+      "signo_domicilio": ["Acuario"],
+      "exaltacion": ["Escorpio"],
+      "caida": ["Tauro"],
+      "detrimento": ["Leo"]
+    },
+    {
+      "nombre": "Neptuno",
+      "ingles": "Neptune",
+      "simbolo": "♆",
+      "significado": "Ilusión, espiritualidad, sueños, confusión, compasión",
+      "ciclo": "~165 años (recorre un signo cada 14 años)",
+      "signo_domicilio": ["Piscis"],
+      "exaltacion": ["Leo"],
+      "caida": ["Acuario"],
+      "detrimento": ["Virgo"]
+    },
+    {
+      "nombre": "Plutón",
+      "ingles": "Pluto",
+      "simbolo": "♇",
+      "significado": "Transformación, poder, muerte y renacimiento, profundidad",
+      "ciclo": "~248 años (recorre un signo cada 12-31 años)",
+      "signo_domicilio": ["Escorpio"],
+      "exaltacion": ["Aries"],
+      "caida": ["Tauro"],
+      "detrimento": ["Tauro"]
+    }
+  ]
+}

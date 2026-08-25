@@ -1,0 +1,58 @@
+{
+  "aspectos": [
+    {
+      "nombre": "Conjunción",
+      "simbolo": "☌",
+      "angulo": 0,
+      "orbe_max": 8,
+      "naturaleza": "Mayor",
+      "descripcion": "Fusión de energías. Los planetas trabajan juntos, intensificándose mutuamente.",
+      "efecto": "Unión, intensidad, enfoque. Puede ser benéfico o maléfico según los planetas involucrados."
+    },
+    {
+      "nombre": "Sextil",
+      "simbolo": "⚹",
+      "angulo": 60,
+      "orbe_max": 6,
+      "naturaleza": "Menor",
+      "descripcion": "Armonía suave. Oportunidades que requieren esfuerzo para materializarse.",
+      "efecto": "Cooperación, talentos naturales, facilidad. Energía que fluye con poco esfuerzo."
+    },
+    {
+      "nombre": "Cuadrado",
+      "simbolo": "□",
+      "angulo": 90,
+      "orbe_max": 8,
+      "naturaleza": "Mayor",
+      "descripcion": "Tensión y conflicto. Fuerza a la acción a través de la fricción.",
+      "efecto": "Desafíos, crecimiento a través de la adversidad, energía que necesita ser canalizada."
+    },
+    {
+      "nombre": "Trígono",
+      "simbolo": "△",
+      "angulo": 120,
+      "orbe_max": 8,
+      "naturaleza": "Mayor",
+      "descripcion": "Armonía natural. Talentos innatos y fluidez energética.",
+      "efecto": "Facilidad, gracia, talentos naturales. Energía que fluye sin obstáculos."
+    },
+    {
+      "nombre": "Oposición",
+      "simbolo": "☍",
+      "angulo": 180,
+      "orbe_max": 8,
+      "naturaleza": "Mayor",
+      "descripcion": "Polaridad y equilibrio. Dos fuerzas opuestas que buscan integración.",
+      "efecto": "Confrontación, conciencia, equilibrio. Requiere integración de opuestos."
+    },
+    {
+      "nombre": "Quincunce",
+      "simbolo": "⚻",
+      "angulo": 150,
+      "orbe_max": 3,
+      "naturaleza": "Menor",
+      "descripcion": "Ajuste constante. Energías que no se entienden entre sí.",
+      "efecto": "Adaptación, frustración, necesidad de ajuste continuo."
+    }
+  ]
+}
