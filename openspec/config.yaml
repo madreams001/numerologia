@@ -1,0 +1,28 @@
+# SDD Configuration — Numerología & Astrología
+context: |
+  Web app for numerology + astrology calculations.
+  React + TypeScript + Vite. Library: kaabalah.
+  Personal tool, may go public. Deploy: local → Vercel.
+  Design spec: docs/superpowers/specs/2026-08-25-numerologia-astrologia-design.md
+
+strict_tdd: false
+
+testing:
+  runner: none
+  framework: none
+  unit: false
+  integration: false
+  e2e: false
+  coverage: false
+  linter: false
+  typechecker: false
+  formatter: false
+
+phases:
+  propose: true
+  spec: true
+  design: true
+  tasks: true
+  apply: true
+  verify: true
+  archive: true
