@@ -85,11 +85,18 @@ describe('NumerologiaTab', () => {
     expect(within(seccion).getByText('Año:')).toBeTruthy()
   })
 
-  it('muestra la gematría con vocales, consonantes y síntesis', () => {
+  it('muestra las interpretaciones textuales junto a los números', () => {
     render(<NumerologiaTab resultado={construirResultado()} />)
     const seccion = obtenerSeccion('Gematría')
     expect(within(seccion).getByText('Vocales:')).toBeTruthy()
     expect(within(seccion).getByText('Consonantes:')).toBeTruthy()
     expect(within(seccion).getByText('Síntesis:')).toBeTruthy()
+  })
+
+  it('muestra texto interpretativo del número de vida y de los retos', () => {
+    render(<NumerologiaTab resultado={construirResultado()} />)
+    expect(screen.getByText(/Eres un líder nato con una fuerte individualidad/)).toBeTruthy()
+    expect(screen.getByText(/Reto Principal:/)).toBeTruthy()
+    expect(screen.getAllByText(/El reto es/i).length).toBeGreaterThan(0)
   })
 })

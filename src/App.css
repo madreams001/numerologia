@@ -181,6 +181,35 @@ body {
   color: var(--color-accent-purple);
 }
 
+.numero-item-contenido {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.numero-item-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  width: 100%;
+}
+
+.interpretacion {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.ciclo-interpretacion {
+  font-size: 0.7rem;
+  line-height: 1.3;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
 .seccion-numerologia {
   margin-top: 2rem;
   padding-top: 1.5rem;

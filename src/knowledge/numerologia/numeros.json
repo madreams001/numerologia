@@ -95,6 +95,14 @@
       "planeta": "Plutón",
       "positive": ["Sanador", "Maestro", "Compasivo", "Espiritual", "Inspirador"],
       "negative": "Autodestructivo, obsesivo, manipulador"
+    },
+    "44": {
+      "nombre": "El Maestro Material",
+      "significado": "Maestría sobre el plano material, construcción a gran escala, disciplina y ética. Número maestro que combina el poder organizador con una visión de servicio colectivo.",
+      "elemento": "Tierra",
+      "planeta": "Urano",
+      "positive": ["Disciplinado", "Visionario", "Organizador", "Responsable", "Ético"],
+      "negative": "Adicto al trabajo, rígido, presión interna"
     }
   }
 }

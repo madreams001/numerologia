@@ -53,6 +53,24 @@
       "buenos": [2, 4, 6],
       "desafiantes": [8],
       "evitar": []
+    },
+    "11": {
+      "mejores": [2, 7, 22],
+      "buenos": [3, 5, 9],
+      "desafiantes": [4, 8],
+      "evitar": []
+    },
+    "22": {
+      "mejores": [4, 8, 11],
+      "buenos": [1, 2, 6],
+      "desafiantes": [3, 5],
+      "evitar": []
+    },
+    "33": {
+      "mejores": [6, 9, 22],
+      "buenos": [2, 3, 11],
+      "desafiantes": [4, 8],
+      "evitar": []
     }
   },
   "notas": [
