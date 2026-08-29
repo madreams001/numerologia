@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { calculateLifePath, calculateBirthday, calculateLifeCycles, calculatePersonalYear, calculateExpression, calculateSoulUrge, calculatePersonality, calculateMotivation, calculateIntuition, calculateTendency } from './modules/numerologia/calculations'
+import { calculateLifePath, calculateBirthday, calculateLifeCycles, calculatePersonalYear, calculateExpression, calculateSoulUrge, calculatePersonality, calculateMotivation, calculateIntuition, calculateTendency, calculateChallenges, getDateEnergies, calculatePersonalCycles, calculateFibonacciCycle, calculateGematria } from './modules/numerologia/calculations'
+import type { NumerologiaResult } from './modules/numerologia/types'
 import { InputForm } from './components/InputForm'
 import type { FormData } from './components/InputForm'
 import { ResultsTabs } from './components/ResultsTabs'
@@ -8,19 +9,6 @@ import { NumerologiaTab } from './components/NumerologiaTab'
 import { AstrologiaTab } from './components/AstrologiaTab'
 import { SinastriaTab } from './components/SinastriaTab'
 import './App.css'
-
-interface NumerologiaResult {
-  vida: number
-  cumpleanos: number
-  ciclos: { primero: number; segundo: number; tercero: number }
-  personalYear: number
-  expresion: number
-  deseoAlma: number
-  personalidad: number
-  motivacion: number
-  intuicion: number
-  tendencia: number
-}
 
 function App() {
   const [formData, setFormData] = useState<FormData>({
@@ -48,6 +36,7 @@ function App() {
 
     const fecha = new Date(formData.fechaNacimiento)
     const anioActual = new Date().getFullYear()
+    const hoy = new Date()
 
     const ciclos = calculateLifeCycles(fecha)
     const result: NumerologiaResult = {
@@ -60,7 +49,12 @@ function App() {
       personalidad: calculatePersonality(formData.nombre),
       motivacion: calculateMotivation(formData.nombre),
       intuicion: calculateIntuition(formData.nombre),
-      tendencia: calculateTendency(formData.nombre)
+      tendencia: calculateTendency(formData.nombre),
+      retos: calculateChallenges(fecha),
+      energias: getDateEnergies(fecha),
+      ciclosPersonales: calculatePersonalCycles(fecha, formData.nombre),
+      fibonacci: calculateFibonacciCycle(fecha, hoy),
+      gematria: calculateGematria(formData.nombre)
     }
 
     setResultado(result)
