@@ -118,9 +118,15 @@ export function calculateLifeCycles(birthDate: Date): LifeCycles {
 // ============ PERSONAL YEAR ============
 
 export function calculatePersonalYear(birthDate: Date, currentYear: number): number {
+  // Pythagorean school: reduce(day) + reduce(month) + reduce(currentYear),
+  // then reduce the sum. Concatenating all digits gives wrong results on
+  // many dates (e.g. 7/2/2026 -> 9 instead of 1).
   const month = birthDate.getMonth() + 1;
   const day = birthDate.getDate();
-  const total = sumAllDigits(`${month}${day}${currentYear}`);
+  const total =
+    reduceWithMasters(day) +
+    reduceWithMasters(month) +
+    reduceWithMasters(currentYear);
   return reduceWithMasters(total);
 }
 

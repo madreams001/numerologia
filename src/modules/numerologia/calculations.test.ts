@@ -96,6 +96,19 @@ describe("Numerology Calculations", () => {
       expect(year).toBeGreaterThanOrEqual(1);
       expect(year).toBeLessThanOrEqual(33);
     });
+
+    it("should follow the Pythagorean school for a Feb 7 birth (day+month+year reduced)", () => {
+      // 07/02/1969, year 2026 -> reduce(7)+reduce(2)+reduce(2026)=7+2+1=10 -> 1
+      const date = new Date(1969, 1, 7, 12);
+      expect(calculatePersonalYear(date, 2026)).toBe(1);
+    });
+
+    it("should reduce each component before summing (no digit concatenation)", () => {
+      // 11/01/2024 -> reduce(11)=11, reduce(1)=1, reduce(2024)=8 -> 20 -> 2
+      // (digit concatenation "1112024" would wrongly give 11)
+      const date = new Date(2024, 0, 11);
+      expect(calculatePersonalYear(date, 2024)).toBe(2);
+    });
   });
 
   // ============ EXPRESSION ============

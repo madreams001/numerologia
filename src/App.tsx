@@ -34,7 +34,10 @@ function App() {
       return
     }
 
-    const fecha = new Date(formData.fechaNacimiento)
+    // Parse fecha in local time at noon to avoid UTC midnight shifting the day
+    // (e.g. "1969-02-07" parsed as UTC rolls back to day 6 in UTC-3 zones)
+    const [y, m, d] = formData.fechaNacimiento.split('-').map(Number)
+    const fecha = new Date(y, m - 1, d, 12)
     const anioActual = new Date().getFullYear()
     const hoy = new Date()
 
