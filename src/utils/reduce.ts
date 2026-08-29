@@ -1,9 +1,9 @@
 /**
  * Numerology reduction utilities
- * Preserves master numbers (11, 22, 33)
+ * Preserves master numbers (11, 22, 33, 44)
  */
 
-export const MASTER_NUMBERS = [11, 22, 33];
+export const MASTER_NUMBERS = [11, 22, 33, 44];
 
 export function sumDigits(n: number): number {
   return n
