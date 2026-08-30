@@ -13,7 +13,7 @@ import type { NumerologiaResult } from '../modules/numerologia/types'
 function construirResultado(): NumerologiaResult {
   const fecha = new Date(1990, 2, 15, 12)
   const hoy = new Date(2026, 7, 29, 12)
-  const nombre = 'MARIA JOSE'
+  const nombre = 'MARIA'
   return {
     vida: 1,
     cumpleanos: 6,
@@ -53,9 +53,10 @@ describe('NumerologiaTab', () => {
   it('muestra los números de reto', () => {
     render(<NumerologiaTab resultado={construirResultado()} />)
     const seccion = obtenerSeccion('Números de Reto')
-    expect(within(seccion).getByText('Reto Principal:')).toBeTruthy()
-    expect(within(seccion).getByText('Reto Secundario 1:')).toBeTruthy()
-    expect(within(seccion).getByText('Reto Secundario 2:')).toBeTruthy()
+    expect(within(seccion).getByText('Reto 1 (Mes − Día):')).toBeTruthy()
+    expect(within(seccion).getByText('Reto 2 (Día − Año):')).toBeTruthy()
+    expect(within(seccion).getByText('Reto 3 (Mes − Año):')).toBeTruthy()
+    expect(within(seccion).getByText('Reto Final:')).toBeTruthy()
   })
 
   it('muestra los ciclos personales con sus 3 períodos y el activo marcado', () => {
@@ -96,7 +97,7 @@ describe('NumerologiaTab', () => {
   it('muestra texto interpretativo del número de vida y de los retos', () => {
     render(<NumerologiaTab resultado={construirResultado()} />)
     expect(screen.getByText(/Eres un líder nato con una fuerte individualidad/)).toBeTruthy()
-    expect(screen.getByText(/Reto Principal:/)).toBeTruthy()
+    expect(screen.getByText(/Reto Final:/)).toBeTruthy()
     expect(screen.getAllByText(/El reto es/i).length).toBeGreaterThan(0)
   })
 })

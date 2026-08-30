@@ -156,11 +156,13 @@ export function NumerologiaTab({ resultado }: NumerologiaTabProps) {
         interpretacion={getMotivationInterpretation(resultado.motivacion)}
       />
 
-      <NumeroConInterpretacion
-        etiqueta="Intuición:"
-        valor={formatearNumero(resultado.intuicion)}
-        interpretacion={getIntuitionInterpretation(resultado.intuicion)}
-      />
+      {resultado.intuicion > 0 && (
+        <NumeroConInterpretacion
+          etiqueta="Intuición:"
+          valor={formatearNumero(resultado.intuicion)}
+          interpretacion={getIntuitionInterpretation(resultado.intuicion)}
+        />
+      )}
 
       <NumeroConInterpretacion
         etiqueta="Tendencia:"
@@ -171,19 +173,24 @@ export function NumerologiaTab({ resultado }: NumerologiaTabProps) {
       <section className="seccion-numerologia">
         <h4>Números de Reto</h4>
         <NumeroConInterpretacion
-          etiqueta="Reto Principal:"
-          valor={String(resultado.retos.mainChallenge)}
-          interpretacion={getChallengeInterpretation(resultado.retos.mainChallenge)}
-        />
-        <NumeroConInterpretacion
-          etiqueta="Reto Secundario 1:"
+          etiqueta="Reto 1 (Mes − Día):"
           valor={String(resultado.retos.subChallenge1)}
           interpretacion={getChallengeInterpretation(resultado.retos.subChallenge1)}
         />
         <NumeroConInterpretacion
-          etiqueta="Reto Secundario 2:"
+          etiqueta="Reto 2 (Día − Año):"
           valor={String(resultado.retos.subChallenge2)}
           interpretacion={getChallengeInterpretation(resultado.retos.subChallenge2)}
+        />
+        <NumeroConInterpretacion
+          etiqueta="Reto 3 (Mes − Año):"
+          valor={String(resultado.retos.challenge3)}
+          interpretacion={getChallengeInterpretation(resultado.retos.challenge3)}
+        />
+        <NumeroConInterpretacion
+          etiqueta="Reto Final:"
+          valor={String(resultado.retos.mainChallenge)}
+          interpretacion={getChallengeInterpretation(resultado.retos.mainChallenge)}
         />
       </section>
 

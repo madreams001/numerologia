@@ -6,7 +6,7 @@
  * SOLO los números calculados (la interpretación textual se agrega en
  * una fase posterior).
  */
-import { calculateGematria } from './calculations'
+import { calculateGematria, type Challenges } from './calculations'
 import type { NumerologyModuleTypes } from './calculations'
 
 export type { NumerologyModuleTypes }
@@ -22,7 +22,7 @@ export interface NumerologiaResult {
   motivacion: number
   intuicion: number
   tendencia: number
-  retos: NumerologyModuleTypes.Challenges
+  retos: Challenges
   energias: NumerologyModuleTypes.DateEnergies
   ciclosPersonales: NumerologyModuleTypes.PersonalCycles
   fibonacci: NumerologyModuleTypes.FibonacciCycle

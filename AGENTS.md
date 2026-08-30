@@ -14,12 +14,13 @@ App web de cálculos de numerología y astrología. Personal tool, puede abrirse
 - Número de Cumpleaños
 - Ciclos de Vida (3 períodos ~27-28 años)
 - Año Personal
-- Número de Expresión (nombre completo)
-- Deseo del Alma (vocales)
-- Personalidad (consonantes)
-- Motivación (primer nombre)
-- Intuición (segundo nombre)
-- Tercera tendencia (apellido)
+- Número de Expresión (nombre completo = nombres + apellidos)
+- Deseo del Alma (vocales del nombre completo)
+- Personalidad (consonantes del nombre completo)
+- Motivación (todos los nombres)
+- Intuición (segundo nombre / segundo nombre de pila)
+- Tendencia (apellidos)
+- El formulario separa "Nombres" y "Apellidos" en dos campos. Expresión/Deseo/Personalidad/Gematría usan el nombre completo (`nombres + apellidos`); Motivación/Intuición usan `nombres`; Tendencia usa `apellidos`.
 - Números maestros: 11, 22, 33 (no se reducen)
 
 ## Cálculos — Astrología

@@ -12,7 +12,8 @@ import './App.css'
 
 function App() {
   const [formData, setFormData] = useState<FormData>({
-    nombre: '',
+    nombres: '',
+    apellidos: '',
     fechaNacimiento: '',
     horaNacimiento: '',
     lugarNacimiento: ''
@@ -29,8 +30,8 @@ function App() {
   }
 
   const calcularNumerologia = () => {
-    if (!formData.nombre || !formData.fechaNacimiento) {
-      alert('Por favor, ingresa tu nombre y fecha de nacimiento.')
+    if (!formData.nombres || !formData.apellidos || !formData.fechaNacimiento) {
+      alert('Por favor, ingresa tus nombres, apellidos y fecha de nacimiento.')
       return
     }
 
@@ -42,22 +43,23 @@ function App() {
     const hoy = new Date()
 
     const ciclos = calculateLifeCycles(fecha)
+    const nombreCompleto = [formData.nombres, formData.apellidos].filter(Boolean).join(' ')
     const result: NumerologiaResult = {
       vida: calculateLifePath(fecha),
       cumpleanos: calculateBirthday(fecha),
       ciclos: { primero: ciclos.first, segundo: ciclos.second, tercero: ciclos.third },
       personalYear: calculatePersonalYear(fecha, anioActual),
-      expresion: calculateExpression(formData.nombre),
-      deseoAlma: calculateSoulUrge(formData.nombre),
-      personalidad: calculatePersonality(formData.nombre),
-      motivacion: calculateMotivation(formData.nombre),
-      intuicion: calculateIntuition(formData.nombre),
-      tendencia: calculateTendency(formData.nombre),
+      expresion: calculateExpression(nombreCompleto),
+      deseoAlma: calculateSoulUrge(nombreCompleto),
+      personalidad: calculatePersonality(nombreCompleto),
+      motivacion: calculateMotivation(formData.nombres),
+      intuicion: calculateIntuition(formData.nombres),
+      tendencia: calculateTendency(formData.apellidos),
       retos: calculateChallenges(fecha),
       energias: getDateEnergies(fecha),
-      ciclosPersonales: calculatePersonalCycles(fecha, formData.nombre),
+      ciclosPersonales: calculatePersonalCycles(fecha, formData.nombres),
       fibonacci: calculateFibonacciCycle(fecha, hoy),
-      gematria: calculateGematria(formData.nombre)
+      gematria: calculateGematria(nombreCompleto)
     }
 
     setResultado(result)

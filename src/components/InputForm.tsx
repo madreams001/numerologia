@@ -1,5 +1,6 @@
 export interface FormData {
-  nombre: string
+  nombres: string
+  apellidos: string
   fechaNacimiento: string
   horaNacimiento: string
   lugarNacimiento: string
@@ -23,15 +24,28 @@ export function InputForm({ formData, onChange, onSubmit }: InputFormProps) {
       <h2>Ingresa tus datos</h2>
       
       <div className="campo">
-        <label htmlFor="nombre">Nombre Completo</label>
+        <label htmlFor="nombres">Nombres</label>
         <input
           type="text"
-          id="nombre"
-          name="nombre"
-          value={formData.nombre}
+          id="nombres"
+          name="nombres"
+          value={formData.nombres}
           onChange={onChange}
           onKeyDown={handleKeyDown}
-          placeholder="Ej: María García López"
+          placeholder="Ej: María José"
+        />
+      </div>
+
+      <div className="campo">
+        <label htmlFor="apellidos">Apellidos</label>
+        <input
+          type="text"
+          id="apellidos"
+          name="apellidos"
+          value={formData.apellidos}
+          onChange={onChange}
+          onKeyDown={handleKeyDown}
+          placeholder="Ej: García López"
         />
       </div>
 

@@ -5,7 +5,6 @@
 
 import { reduceWithMasters, MASTER_NUMBERS } from "../../utils/reduce";
 import {
-  calculateChallenges as kaabalahCalculateChallenges,
   calculateCycles as kaabalahCalculateCycles,
   calculatePersonalCycles as kaabalahCalculatePersonalCycles,
   calculateFibonacciCycle as kaabalahCalculateFibonacciCycle,
@@ -75,13 +74,16 @@ export function calculateLifePath(birthDate: Date): number {
   const month = birthDate.getMonth() + 1;
   const day = birthDate.getDate();
 
-  // Sum all digits of the full date
-  const total = sumAllDigits(`${month}${day}${year}`);
-  return reduceWithMasters(total);
-}
-
-function sumAllDigits(dateStr: string): number {
-  return dateStr.split("").reduce((sum, d) => sum + parseInt(d, 10), 0);
+  // Per-component school: reduce each component (day, month, year) with
+  // master numbers preserved, then reduce the sum. This is the same school
+  // used by the Personal Year, Life Cycles and the kaabalah straight-across
+  // reduction (which also preserves masters). Direct digit concatenation is
+  // a DIFFERENT school that only differs on master-heavy dates, but those
+  // differences are exactly what we want to keep (e.g. 11/01/1954 ->
+  // per-component 4 vs concatenation 22).
+  return reduceWithMasters(
+    reduceWithMasters(day) + reduceWithMasters(month) + reduceWithMasters(year)
+  );
 }
 
 // ============ BIRTHDAY NUMBER ============
@@ -103,14 +105,21 @@ export function calculateLifeCycles(birthDate: Date): LifeCycles {
   const day = birthDate.getDate();
   const year = birthDate.getFullYear();
 
-  // First cycle: sum month + day
-  const first = reduceWithMasters(month + day);
+  // Per-component school: reduce each component (with masters) before summing.
+  // First cycle: reduced month + reduced day
+  const first = reduceWithMasters(
+    reduceWithMasters(month) + reduceWithMasters(day)
+  );
 
-  // Second cycle: sum day + year
-  const second = reduceWithMasters(day + year);
+  // Second cycle: reduced day + reduced year
+  const second = reduceWithMasters(
+    reduceWithMasters(day) + reduceWithMasters(year)
+  );
 
-  // Third cycle: sum first + second
-  const third = reduceWithMasters(first + second);
+  // Third cycle: reduced first + reduced second
+  const third = reduceWithMasters(
+    reduceWithMasters(first) + reduceWithMasters(second)
+  );
 
   return { first, second, third };
 }
@@ -119,8 +128,13 @@ export function calculateLifeCycles(birthDate: Date): LifeCycles {
 
 export function calculatePersonalYear(birthDate: Date, currentYear: number): number {
   // Pythagorean school: reduce(day) + reduce(month) + reduce(currentYear),
-  // then reduce the sum. Concatenating all digits gives wrong results on
-  // many dates (e.g. 7/2/2026 -> 9 instead of 1).
+  // then reduce the sum. Digit concatenation is a DIFFERENT school: it
+  // happens to agree on some dates (7/2/2026 -> 19 -> 1 either way) but
+  // diverges when a concatenated total lands on a master number, e.g.
+  // 11/01/2024 -> concat "1112024" = 11 vs per-component 11+1+8 = 20 -> 2.
+  // (For the record, the "9 instead of 1" seen for 7/2/1969 was caused by
+  // the timezone bug shifting the day to the 6th, "262026" -> 9 — not by
+  // concatenation.) We use per-component consistently everywhere.
   const month = birthDate.getMonth() + 1;
   const day = birthDate.getDate();
   const total =
@@ -156,31 +170,43 @@ export function calculatePersonality(fullName: string): number {
   return reduceWithMasters(sum);
 }
 
-// ============ MOTIVATION (FIRST NAME) ============
+// ============ MOTIVATION (GIVEN NAMES) ============
 
-export function calculateMotivation(fullName: string): number {
-  const firstName = fullName.split(" ")[0] || "";
-  const letters = getLetters(firstName);
+/**
+ * Motivation: the full set of given names (e.g. "ANDRES RAUL"), reduced
+ * together. Every given name contributes — there is no split on the first
+ * word. Empty or letter-less input reduces to 0.
+ */
+export function calculateMotivation(firstNames: string): number {
+  const letters = getLetters(firstNames);
+  // SCHOOL DECISION (documented): this computes ALL given names reduced
+  // together (e.g. "ANDRES RAUL" -> 5), interpreted as the "general impulse"
+  // of the given names. The CLASSICAL "soul motive" school uses ONLY the
+  // vowels of the first name (without Y). The full-name variant was chosen
+  // deliberately and the value is kept; the classical alternative exists.
   const sum = letters.reduce((acc, l) => acc + letterToNumber(l), 0);
   return reduceWithMasters(sum);
 }
 
-// ============ INTUITION (MIDDLE NAME) ============
+// ============ INTUITION (SECOND GIVEN NAME) ============
 
-export function calculateIntuition(fullName: string): number {
-  const parts = fullName.split(" ");
-  const middleName = parts.length >= 3 ? parts[1] : "";
+export function calculateIntuition(nombres: string): number {
+  const parts = nombres.trim().split(/\s+/);
+  const middleName = parts.length >= 2 ? parts[1] : "";
   const letters = getLetters(middleName);
   const sum = letters.reduce((acc, l) => acc + letterToNumber(l), 0);
   return reduceWithMasters(sum);
 }
 
-// ============ TENDENCY (LAST NAME) ============
+// ============ TENDENCY (LAST NAMES) ============
 
-export function calculateTendency(fullName: string): number {
-  const parts = fullName.split(" ");
-  const lastName = parts[parts.length - 1] || "";
-  const letters = getLetters(lastName);
+/**
+ * Tendency: the full set of last names (e.g. "AVILA BEDETTI"), reduced
+ * directly. The last names are supplied as-is (no slicing of a full name).
+ * Empty or letter-less input reduces to 0.
+ */
+export function calculateTendency(lastNames: string): number {
+  const letters = getLetters(lastNames);
   const sum = letters.reduce((acc, l) => acc + letterToNumber(l), 0);
   return reduceWithMasters(sum);
 }
@@ -209,13 +235,53 @@ export function getLetterMapping(): Record<string, number> {
 export type GematriaResult = ReturnType<typeof kaabalahCalculateGematria>;
 
 /**
- * Life challenges (kaabalah): absolute differences between the reduced
- * day, month and year. Values range from 0 to 8.
+ * Master-number policy for challenges: day/month/year are reduced WITH
+ * masters preserved (e.g. day 29 -> 11, year 1975 -> 22), deliberately kept
+ * in sync with Date Energies (getDateEnergies uses the same per-component
+ * reduction). The resulting absolute differences stay within the
+ * interpretable 0-8 range for ordinary dates.
+ *
+ * Semantics (classical numerology): the THREE life-line challenges form the
+ * trinity — P1 = |month − day|, P2 = |day − year|, P3 = |month − year| — and
+ * the FINAL challenge is |P1 − P2|. kaabalah called |P1 − P2| "mainChallenge"
+ * and omitted P3; we keep the field names for compatibility but now expose
+ * all four values.
  */
-export function calculateChallenges(
-  birthDate: Date
-): NumerologyModuleTypes.Challenges {
-  return kaabalahCalculateChallenges(birthDate);
+export interface Challenges {
+  day: number;
+  month: number;
+  year: number;
+  subChallenge1: number; // |month - day| first life-line challenge
+  subChallenge2: number; // |day - year| second life-line challenge
+  challenge3: number;    // |month - year| third life-line challenge
+  mainChallenge: number; // |subChallenge1 - subChallenge2| final challenge
+}
+
+export function calculateChallenges(birthDate: Date): Challenges {
+  const month = birthDate.getMonth() + 1;
+  const day = birthDate.getDate();
+  const year = birthDate.getFullYear();
+
+  const dayN = reduceWithMasters(day);
+  const monthN = reduceWithMasters(month);
+  const yearN = reduceWithMasters(year);
+
+  const subChallenge1 = reduceWithMasters(Math.abs(monthN - dayN));
+  const subChallenge2 = reduceWithMasters(Math.abs(dayN - yearN));
+  const challenge3 = reduceWithMasters(Math.abs(monthN - yearN));
+  const mainChallenge = reduceWithMasters(
+    Math.abs(subChallenge1 - subChallenge2)
+  );
+
+  return {
+    day: dayN,
+    month: monthN,
+    year: yearN,
+    subChallenge1,
+    subChallenge2,
+    challenge3,
+    mainChallenge,
+  };
 }
 
 /**

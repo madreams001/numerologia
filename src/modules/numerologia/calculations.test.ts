@@ -26,22 +26,36 @@ describe("Numerology Calculations", () => {
   // ============ LIFE PATH ============
   describe("Life Path Number", () => {
     it("should calculate life path for standard date", () => {
-      // 15/03/1990: 1+5+0+3+1+9+9+0 = 28 -> 2+8 = 10 -> 1+0 = 1
+      // 15/03/1990 per-component: 6 + 3 + 1 = 10 -> 1
       const date = new Date(1990, 2, 15);
       expect(calculateLifePath(date)).toBe(1);
     });
 
-    it("should preserve master number 11", () => {
-      // 02/11/1999: 2+1+1+1+9+9+9 = 32 -> 3+2 = 5
-      // Actually: 2+1+1+1+9+9+9 = 32 -> 5
+    it("should preserve master number 11 in the month", () => {
+      // 02/11/1999 per-component: 2 + 11 + 1 = 14 -> 5
       const date = new Date(1999, 10, 2);
       expect(calculateLifePath(date)).toBe(5);
     });
 
-    it("should preserve master number 22", () => {
-      // 04/22/1999: 4+2+2+1+9+9+9 = 36 -> 3+6 = 9
+    it("should preserve master number 22 in the day", () => {
+      // 22/04/1999 per-component: 22 + 4 + 1 = 27 -> 9
       const date = new Date(1999, 3, 22);
       expect(calculateLifePath(date)).toBe(9);
+    });
+
+    it("preserves master components (29/11) under the per-component school", () => {
+      // 29/11/1985: day 29 -> 11 (master), month 11 (master), year 1985 -> 5,
+      // so 11 + 11 + 5 = 27 -> 9. Both masters are kept in the middle sum.
+      const date = new Date(1985, 10, 29, 12);
+      expect(calculateLifePath(date)).toBe(9);
+    });
+
+    it("protects the per-component school against digit concatenation", () => {
+      // 11/01/1954: per-component 11 + 1 + 1 = 13 -> 4, whereas digit
+      // concatenation "11011954" = 22 (a master number). The two schools
+      // diverge exactly on master-heavy dates; per-component is the chosen one.
+      const date = new Date(1954, 0, 11, 12);
+      expect(calculateLifePath(date)).toBe(4);
     });
   });
 
@@ -79,10 +93,10 @@ describe("Numerology Calculations", () => {
       expect(cycles).toHaveProperty("third");
     });
 
-    it("first cycle should be month + day", () => {
+    it("first cycle should be month + day (per-component)", () => {
       const date = new Date(1990, 2, 15);
       const cycles = calculateLifeCycles(date);
-      // 3 + 15 = 18 -> 1+8 = 9
+      // reduce(3) + reduce(15) = 3 + 6 = 9 -> 9
       expect(cycles.first).toBe(9);
     });
   });
@@ -148,19 +162,25 @@ describe("Numerology Calculations", () => {
 
   // ============ MOTIVATION ============
   describe("Motivation Number", () => {
-    it("should use first name only", () => {
-      const mot1 = calculateMotivation("JOHN DOE");
-      const mot2 = calculateMotivation("JANE DOE");
+    it("should calculate over the given names", () => {
+      const mot1 = calculateMotivation("JOHN");
+      const mot2 = calculateMotivation("JANE");
       expect(mot1).not.toBe(mot2);
+    });
+
+    it("includes ALL given names, not just the first word", () => {
+      // "MARIA" -> 24 -> 6; "MARIA JOSE" -> 24 + 13 = 37 -> 10 -> 1
+      expect(calculateMotivation("MARIA")).toBe(6);
+      expect(calculateMotivation("MARIA JOSE")).toBe(1);
     });
   });
 
   // ============ INTUITION ============
   describe("Intuition Number", () => {
-    it("should use middle name if exists", () => {
-      const intWithMiddle = calculateIntuition("JOHN MICHAEL DOE");
-      const intWithoutMiddle = calculateIntuition("JOHN DOE");
-      // John has no middle name, so should return 0
+    it("should use the second given name if exists", () => {
+      const intWithMiddle = calculateIntuition("JOHN MICHAEL");
+      const intWithoutMiddle = calculateIntuition("JOHN");
+      // John has no second given name, so should return 0
       expect(intWithoutMiddle).toBe(0);
       expect(typeof intWithMiddle).toBe("number");
     });
@@ -168,10 +188,27 @@ describe("Numerology Calculations", () => {
 
   // ============ TENDENCY ============
   describe("Tendency Number", () => {
-    it("should use last name", () => {
-      const tend1 = calculateTendency("JOHN SMITH");
-      const tend2 = calculateTendency("JOHN JONES");
+    it("should calculate over the given last names", () => {
+      const tend1 = calculateTendency("SMITH");
+      const tend2 = calculateTendency("JONES");
       expect(tend1).not.toBe(tend2);
+    });
+
+    it("uses the composite surname, not only its last word", () => {
+      // "GARCIA LOPEZ" -> 59 -> 14 -> 5 vs "LOPEZ" -> 29 -> 11 must differ
+      const composite = calculateTendency("GARCIA LOPEZ");
+      const lastWordOnly = calculateTendency("LOPEZ");
+      expect(composite).not.toBe(lastWordOnly);
+    });
+
+    it("computes the user's full surname (AVILA BEDETTI)", () => {
+      // AVILA: 1+4+9+3+1 = 18; BEDETTI: 2+5+4+5+2+2+9 = 29;
+      // 18 + 29 = 47 -> 11 (master number, not reduced further)
+      expect(calculateTendency("AVILA BEDETTI")).toBe(11);
+    });
+
+    it("returns 0 when there is no surname", () => {
+      expect(calculateTendency("")).toBe(0);
     });
   });
 
@@ -241,7 +278,8 @@ describe("Numerology Calculations", () => {
       expect(c).toHaveProperty("mainChallenge");
       expect(c).toHaveProperty("subChallenge1");
       expect(c).toHaveProperty("subChallenge2");
-      const values = [c.day, c.month, c.year, c.mainChallenge, c.subChallenge1, c.subChallenge2];
+      expect(c).toHaveProperty("challenge3");
+      const values = [c.day, c.month, c.year, c.mainChallenge, c.subChallenge1, c.subChallenge2, c.challenge3];
       for (const v of values) {
         expect(v).toBeGreaterThanOrEqual(0);
         expect(v).toBeLessThanOrEqual(8);
@@ -250,9 +288,12 @@ describe("Numerology Calculations", () => {
       expect(c.day).toBe(6);
       expect(c.month).toBe(3);
       expect(c.year).toBe(1);
-      expect(c.mainChallenge).toBe(2);
+      // Three life-line challenges: |3-6|=3, |6-1|=5, |3-1|=2
       expect(c.subChallenge1).toBe(3);
       expect(c.subChallenge2).toBe(5);
+      expect(c.challenge3).toBe(2);
+      // Final challenge |P1-P2|
+      expect(c.mainChallenge).toBe(2);
     });
 
     it("getDateEnergies returns day/month/year with reduction steps", () => {

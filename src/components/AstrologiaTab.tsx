@@ -8,25 +8,30 @@ interface AstrologiaTabProps {
   lugarNacimiento: string
 }
 
-// Coordenadas de ciudades principales (fallback)
-const CIUDADES: Record<string, { lat: number; lon: number }> = {
-  'buenos aires': { lat: -34.6037, lon: -58.3816 },
-  'cordoba': { lat: -31.4201, lon: -64.1888 },
-  'rosario': { lat: -32.9468, lon: -60.6506 },
-  'mendoza': { lat: -32.8895, lon: -68.8458 },
-  'santiago': { lat: -33.4489, lon: -70.6693 },
-  'lima': { lat: -12.0464, lon: -77.0428 },
-  'mexico': { lat: 19.4326, lon: -99.1332 },
-  'madrid': { lat: 40.4168, lon: -3.7038 },
-  'barcelona': { lat: 41.3874, lon: 2.1686 },
-  'medellin': { lat: 6.2476, lon: -75.5658 },
-  'bogota': { lat: 4.711, lon: -74.0721 },
-  'quito': { lat: -0.1807, lon: -78.4678 },
-  'caracas': { lat: 10.4806, lon: -66.9036 },
-  'montevideo': { lat: -34.9011, lon: -56.1645 },
+// Coordenadas de ciudades principales (fallback). timeZoneOffset está en
+// minutos respecto de UTC usando la convención del módulo de astrología:
+// negativo = oeste de UTC (p.ej. -180 = UTC-3). Argentina usa UTC-3 fijo todo
+// el año desde 2018 (Ley 27.233 eliminó el horario de verano), así que -180 es
+// correcto para Córdoba y Buenos Aires (default). Las demás ciudades cargan su
+// propio offset sin horario de verano (simplificación razonable para la app).
+const CIUDADES: Record<string, { lat: number; lon: number; tz: number }> = {
+  'buenos aires': { lat: -34.6037, lon: -58.3816, tz: -180 },
+  'cordoba': { lat: -31.4201, lon: -64.1888, tz: -180 },
+  'rosario': { lat: -32.9468, lon: -60.6506, tz: -180 },
+  'mendoza': { lat: -32.8895, lon: -68.8458, tz: -180 },
+  'santiago': { lat: -33.4489, lon: -70.6693, tz: -240 },
+  'lima': { lat: -12.0464, lon: -77.0428, tz: -300 },
+  'mexico': { lat: 19.4326, lon: -99.1332, tz: -360 },
+  'madrid': { lat: 40.4168, lon: -3.7038, tz: 60 },
+  'barcelona': { lat: 41.3874, lon: 2.1686, tz: 60 },
+  'medellin': { lat: 6.2476, lon: -75.5658, tz: -300 },
+  'bogota': { lat: 4.711, lon: -74.0721, tz: -300 },
+  'quito': { lat: -0.1807, lon: -78.4678, tz: -300 },
+  'caracas': { lat: 10.4806, lon: -66.9036, tz: -240 },
+  'montevideo': { lat: -34.9011, lon: -56.1645, tz: -180 },
 }
 
-function resolverCoordenadas(lugar: string): { lat: number; lon: number } | null {
+function resolverCoordenadas(lugar: string): { lat: number; lon: number; tz: number } | null {
   const lower = lugar.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
   for (const [ciudad, coords] of Object.entries(CIUDADES)) {
     if (lower.includes(ciudad)) return coords
@@ -55,7 +60,11 @@ export function AstrologiaTab({ fechaNacimiento, horaNacimiento, lugarNacimiento
     setError(null)
 
     try {
-      const fecha = new Date(fechaNacimiento)
+      // Parse the date at local noon (same as App.tsx). "1969-02-07" parsed
+      // as `new Date("1969-02-07")` becomes UTC midnight, which rolls back to
+      // the 6th in UTC-3 zones and shifts the whole chart one day early.
+      const [y, m, d] = fechaNacimiento.split('-').map(Number)
+      const fecha = new Date(y, m - 1, d, 12)
       const [hora, minuto] = horaNacimiento ? horaNacimiento.split(':').map(Number) : [12, 0]
 
       const result = await calculateNatalChart({
@@ -66,7 +75,9 @@ export function AstrologiaTab({ fechaNacimiento, horaNacimiento, lugarNacimiento
         minute: minuto,
         latitude: coords?.lat ?? -34.6037,
         longitude: coords?.lon ?? -58.3816,
-        timeZoneOffset: coords ? -180 : -180 // Default UTC-3 (Argentina)
+        // Default UTC-3 (Argentina, fixed year-round since 2018); cities
+        // above carry their own offset (see timeZoneOffset docs).
+        timeZoneOffset: coords?.tz ?? -180
       })
 
       setChart(result)
