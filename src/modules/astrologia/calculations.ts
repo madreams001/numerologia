@@ -88,17 +88,47 @@ const PLANET_NAMES_ES: Record<string, string> = {
 // ============ CORE FUNCTIONS ============
 
 /**
- * Initialize Swiss Ephemeris WASM. Must be called before any chart calculation.
- * Safe to call multiple times — subsequent calls are no-ops.
+ * Resolve the browser URL where the Swiss Ephemeris data files (.se1) are served.
+ *
+ * Vite copies everything under `public/` verbatim into `dist/`, and `BASE_URL`
+ * (import.meta.env.BASE_URL) is `/numerologia/` on GitHub Pages and `/` in local
+ * dev — so this resolves correctly in both environments without hardcoding.
+ */
+function resolveEphePath(): string {
+  const base = import.meta.env.BASE_URL || "/";
+  // "BASE_URL" is guaranteed to end with "/", so strip it before appending
+  // the "ephe" folder: "/numerologia/" -> "/numerologia/ephe".
+  return `${base.replace(/\/+$/, "")}/ephe`;
+}
+
+/**
+ * Initialize Swiss Ephemeris. In the browser it fetches the ephemeris .se1 files
+ * from the URL where Vite serves them (resolved via BASE_URL); in Node/tests the
+ * node backend resolves them from the kaabalah filesystem bundles, so no
+ * ephePath is passed there. Idempotent — the underlying getSwissEph caches once.
  */
 export async function initSwissEph(): Promise<void> {
-  await kaabalahGetSwissEph();
+  if (typeof window !== "undefined") {
+    await kaabalahGetSwissEph({ ephePath: resolveEphePath() });
+  } else {
+    await kaabalahGetSwissEph();
+  }
+}
+
+/**
+ * Idempotent guard that ensures Swiss Ephemeris is initialized before any chart
+ * calculation. Called at the start of every public calculation wrapper so no
+ * caller (component, future feature, test) has to remember to init manually.
+ */
+async function ensureSwissEph(): Promise<void> {
+  await initSwissEph();
 }
 
 /**
  * Calculate a natal chart from birth data.
  */
 export async function calculateNatalChart(input: ChartInput): Promise<NatalChartResult> {
+  await ensureSwissEph();
   const { year, month, day, hour, minute, latitude, longitude } = input;
   const hasTime = hour !== undefined && minute !== undefined;
 
@@ -149,6 +179,7 @@ export async function calculateTransits(
   natalInput: ChartInput,
   transitDate: Date,
 ): Promise<TransitResult> {
+  await ensureSwissEph();
   const natal = await calculateNatalChart(natalInput);
 
   const options: TransitChartOptions = {
@@ -203,6 +234,7 @@ export async function calculateSynastry(
   personA: ChartInput,
   personB: ChartInput,
 ): Promise<SynastryChart> {
+  await ensureSwissEph();
   const options: SynastryChartOptions = {
     chartA: {
       date: {
