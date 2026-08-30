@@ -1,6 +1,8 @@
 export interface FormData {
-  nombres: string
-  apellidos: string
+  nombresRegistro: string
+  apellidosRegistro: string
+  nombresUso: string
+  apellidosUso: string
   fechaNacimiento: string
   horaNacimiento: string
   lugarNacimiento: string
@@ -22,31 +24,71 @@ export function InputForm({ formData, onChange, onSubmit }: InputFormProps) {
   return (
     <section className="formulario">
       <h2>Ingresa tus datos</h2>
-      
-      <div className="campo">
-        <label htmlFor="nombres">Nombres</label>
-        <input
-          type="text"
-          id="nombres"
-          name="nombres"
-          value={formData.nombres}
-          onChange={onChange}
-          onKeyDown={handleKeyDown}
-          placeholder="Ej: María José"
-        />
+
+      <div className="seccion-formulario">
+        <h3>Registro Civil</h3>
+        <p className="ayuda-formulario">
+          Tu nombre de nacimiento, tal como figura en el acta / DNI.
+        </p>
+
+        <div className="campo">
+          <label htmlFor="nombresRegistro">Nombres</label>
+          <input
+            type="text"
+            id="nombresRegistro"
+            name="nombresRegistro"
+            value={formData.nombresRegistro}
+            onChange={onChange}
+            onKeyDown={handleKeyDown}
+            placeholder="Ej: María José"
+          />
+        </div>
+
+        <div className="campo">
+          <label htmlFor="apellidosRegistro">Apellidos</label>
+          <input
+            type="text"
+            id="apellidosRegistro"
+            name="apellidosRegistro"
+            value={formData.apellidosRegistro}
+            onChange={onChange}
+            onKeyDown={handleKeyDown}
+            placeholder="Ej: García López"
+          />
+        </div>
       </div>
 
-      <div className="campo">
-        <label htmlFor="apellidos">Apellidos</label>
-        <input
-          type="text"
-          id="apellidos"
-          name="apellidos"
-          value={formData.apellidos}
-          onChange={onChange}
-          onKeyDown={handleKeyDown}
-          placeholder="Ej: García López"
-        />
+      <div className="seccion-formulario">
+        <h3>Uso diario</h3>
+        <p className="ayuda-formulario">
+          Cómo te llaman y cómo te presentás (puede ser un diminutivo o un nombre distinto).
+        </p>
+
+        <div className="campo">
+          <label htmlFor="nombresUso">Nombres</label>
+          <input
+            type="text"
+            id="nombresUso"
+            name="nombresUso"
+            value={formData.nombresUso}
+            onChange={onChange}
+            onKeyDown={handleKeyDown}
+            placeholder="Ej: María"
+          />
+        </div>
+
+        <div className="campo">
+          <label htmlFor="apellidosUso">Apellidos</label>
+          <input
+            type="text"
+            id="apellidosUso"
+            name="apellidosUso"
+            value={formData.apellidosUso}
+            onChange={onChange}
+            onKeyDown={handleKeyDown}
+            placeholder="Ej: García"
+          />
+        </div>
       </div>
 
       <div className="campo">

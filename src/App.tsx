@@ -12,8 +12,10 @@ import './App.css'
 
 function App() {
   const [formData, setFormData] = useState<FormData>({
-    nombres: '',
-    apellidos: '',
+    nombresRegistro: '',
+    apellidosRegistro: '',
+    nombresUso: '',
+    apellidosUso: '',
     fechaNacimiento: '',
     horaNacimiento: '',
     lugarNacimiento: ''
@@ -30,8 +32,16 @@ function App() {
   }
 
   const calcularNumerologia = () => {
-    if (!formData.nombres || !formData.apellidos || !formData.fechaNacimiento) {
-      alert('Por favor, ingresa tus nombres, apellidos y fecha de nacimiento.')
+    if (
+      !formData.nombresRegistro ||
+      !formData.apellidosRegistro ||
+      !formData.nombresUso ||
+      !formData.apellidosUso ||
+      !formData.fechaNacimiento
+    ) {
+      alert(
+        'Por favor, ingresa los nombres y apellidos de ambos perfiles (Registro Civil y Uso diario) y la fecha de nacimiento.'
+      )
       return
     }
 
@@ -42,24 +52,48 @@ function App() {
     const anioActual = new Date().getFullYear()
     const hoy = new Date()
 
+    // Cálculos basados en FECHA: únicos (no dependen del perfil de nombre).
     const ciclos = calculateLifeCycles(fecha)
-    const nombreCompleto = [formData.nombres, formData.apellidos].filter(Boolean).join(' ')
+
+    // Cálculos basados en NOMBRE: se calculan por separado para cada perfil.
+    const nombreCompletoRegistro = [formData.nombresRegistro, formData.apellidosRegistro]
+      .filter(Boolean)
+      .join(' ')
+    const nombreCompletoUso = [formData.nombresUso, formData.apellidosUso]
+      .filter(Boolean)
+      .join(' ')
+
     const result: NumerologiaResult = {
       vida: calculateLifePath(fecha),
       cumpleanos: calculateBirthday(fecha),
       ciclos: { primero: ciclos.first, segundo: ciclos.second, tercero: ciclos.third },
       personalYear: calculatePersonalYear(fecha, anioActual),
-      expresion: calculateExpression(nombreCompleto),
-      deseoAlma: calculateSoulUrge(nombreCompleto),
-      personalidad: calculatePersonality(nombreCompleto),
-      motivacion: calculateMotivation(formData.nombres),
-      intuicion: calculateIntuition(formData.nombres),
-      tendencia: calculateTendency(formData.apellidos),
       retos: calculateChallenges(fecha),
       energias: getDateEnergies(fecha),
-      ciclosPersonales: calculatePersonalCycles(fecha, formData.nombres),
+      // Primer nombre del perfil de Registro Civil, como referencia del nombre
+      // de pila para los ciclos personales (cálculo basado en fecha/nombre).
+      ciclosPersonales: calculatePersonalCycles(fecha, formData.nombresRegistro),
       fibonacci: calculateFibonacciCycle(fecha, hoy),
-      gematria: calculateGematria(nombreCompleto)
+      registro: {
+        nombreCompleto: nombreCompletoRegistro,
+        expresion: calculateExpression(nombreCompletoRegistro),
+        deseoAlma: calculateSoulUrge(nombreCompletoRegistro),
+        personalidad: calculatePersonality(nombreCompletoRegistro),
+        motivacion: calculateMotivation(formData.nombresRegistro),
+        intuicion: calculateIntuition(formData.nombresRegistro),
+        tendencia: calculateTendency(formData.apellidosRegistro),
+        gematria: calculateGematria(nombreCompletoRegistro)
+      },
+      uso: {
+        nombreCompleto: nombreCompletoUso,
+        expresion: calculateExpression(nombreCompletoUso),
+        deseoAlma: calculateSoulUrge(nombreCompletoUso),
+        personalidad: calculatePersonality(nombreCompletoUso),
+        motivacion: calculateMotivation(formData.nombresUso),
+        intuicion: calculateIntuition(formData.nombresUso),
+        tendencia: calculateTendency(formData.apellidosUso),
+        gematria: calculateGematria(nombreCompletoUso)
+      }
     }
 
     setResultado(result)

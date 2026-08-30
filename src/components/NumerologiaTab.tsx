@@ -1,5 +1,5 @@
 import { isMasterNumber } from '../modules/numerologia/calculations'
-import type { NumerologiaResult } from '../modules/numerologia/types'
+import type { NumerologiaResult, PerfilCalculos } from '../modules/numerologia/types'
 import {
   getLifePathInterpretation,
   getBirthdayInterpretation,
@@ -72,11 +72,70 @@ function pasosReduccion(value: { reducedValue: number; reductionSteps: number[] 
   return value.reducedValue.toString()
 }
 
-function pasosGematria(info: { originalSum: number; reductionSteps: number[]; finalValue: number }): string {
-  if (info.reductionSteps.length > 0) {
-    return `${info.originalSum} → ${info.reductionSteps.join(' → ')}`
-  }
-  return info.originalSum.toString()
+interface PerfilNumerosProps {
+  titulo: string
+  perfil: PerfilCalculos
+}
+
+function PerfilNumeros({ titulo, perfil }: PerfilNumerosProps) {
+  return (
+    <div className="perfil-numeros">
+      <h4 className="perfil-titulo">{titulo}</h4>
+      <p className="perfil-nombre">{perfil.nombreCompleto}</p>
+
+      <NumeroConInterpretacion
+        etiqueta="Expresión:"
+        valor={formatearNumero(perfil.expresion)}
+        interpretacion={getExpressionInterpretation(perfil.expresion)}
+      />
+
+      <NumeroConInterpretacion
+        etiqueta="Deseo del Alma:"
+        valor={formatearNumero(perfil.deseoAlma)}
+        interpretacion={getSoulUrgeInterpretation(perfil.deseoAlma)}
+      />
+
+      <NumeroConInterpretacion
+        etiqueta="Personalidad:"
+        valor={formatearNumero(perfil.personalidad)}
+        interpretacion={getPersonalityInterpretation(perfil.personalidad)}
+      />
+
+      <NumeroConInterpretacion
+        etiqueta="Motivación:"
+        valor={formatearNumero(perfil.motivacion)}
+        interpretacion={getMotivationInterpretation(perfil.motivacion)}
+      />
+
+      {perfil.intuicion > 0 && (
+        <NumeroConInterpretacion
+          etiqueta="Intuición:"
+          valor={formatearNumero(perfil.intuicion)}
+          interpretacion={getIntuitionInterpretation(perfil.intuicion)}
+        />
+      )}
+
+      <NumeroConInterpretacion
+        etiqueta="Tendencia:"
+        valor={formatearNumero(perfil.tendencia)}
+        interpretacion={getTendencyInterpretation(perfil.tendencia)}
+      />
+
+      <div className="numero-item">
+        <div className="numero-item-contenido">
+          <div className="numero-item-fila">
+            <span className="etiqueta">Gematría:</span>
+            <span className="valor">
+              {perfil.gematria.synthesis.finalValue}
+            </span>
+          </div>
+          <InterpretacionTexto
+            texto={getGematriaInterpretation(perfil.gematria.synthesis.finalValue)}
+          />
+        </div>
+      </div>
+    </div>
+  )
 }
 
 const LIMITES_FIBONACCI = [0, 1, 2, 3, 5, 8, 13, 21]
@@ -132,43 +191,13 @@ export function NumerologiaTab({ resultado }: NumerologiaTabProps) {
         interpretacion={getPersonalYearInterpretation(resultado.personalYear)}
       />
 
-      <NumeroConInterpretacion
-        etiqueta="Número de Expresión:"
-        valor={formatearNumero(resultado.expresion)}
-        interpretacion={getExpressionInterpretation(resultado.expresion)}
-      />
-
-      <NumeroConInterpretacion
-        etiqueta="Deseo del Alma:"
-        valor={formatearNumero(resultado.deseoAlma)}
-        interpretacion={getSoulUrgeInterpretation(resultado.deseoAlma)}
-      />
-
-      <NumeroConInterpretacion
-        etiqueta="Personalidad:"
-        valor={formatearNumero(resultado.personalidad)}
-        interpretacion={getPersonalityInterpretation(resultado.personalidad)}
-      />
-
-      <NumeroConInterpretacion
-        etiqueta="Motivación:"
-        valor={formatearNumero(resultado.motivacion)}
-        interpretacion={getMotivationInterpretation(resultado.motivacion)}
-      />
-
-      {resultado.intuicion > 0 && (
-        <NumeroConInterpretacion
-          etiqueta="Intuición:"
-          valor={formatearNumero(resultado.intuicion)}
-          interpretacion={getIntuitionInterpretation(resultado.intuicion)}
-        />
-      )}
-
-      <NumeroConInterpretacion
-        etiqueta="Tendencia:"
-        valor={formatearNumero(resultado.tendencia)}
-        interpretacion={getTendencyInterpretation(resultado.tendencia)}
-      />
+      <section className="seccion-numerologia">
+        <h4>Comparación por Nombre</h4>
+        <div className="grid-perfiles">
+          <PerfilNumeros titulo="Registro Civil" perfil={resultado.registro} />
+          <PerfilNumeros titulo="Uso diario" perfil={resultado.uso} />
+        </div>
+      </section>
 
       <section className="seccion-numerologia">
         <h4>Números de Reto</h4>
@@ -284,31 +313,6 @@ export function NumerologiaTab({ resultado }: NumerologiaTabProps) {
           valor={pasosReduccion(resultado.energias.yearEnergy)}
           interpretacion={getDateEnergyInterpretation(
             resultado.energias.yearEnergy.reducedValue
-          )}
-        />
-      </section>
-
-      <section className="seccion-numerologia">
-        <h4>Gematría</h4>
-        <NumeroConInterpretacion
-          etiqueta="Vocales:"
-          valor={pasosGematria(resultado.gematria.vowels)}
-          interpretacion={getGematriaInterpretation(
-            resultado.gematria.vowels.finalValue
-          )}
-        />
-        <NumeroConInterpretacion
-          etiqueta="Consonantes:"
-          valor={pasosGematria(resultado.gematria.consonants)}
-          interpretacion={getGematriaInterpretation(
-            resultado.gematria.consonants.finalValue
-          )}
-        />
-        <NumeroConInterpretacion
-          etiqueta="Síntesis:"
-          valor={pasosGematria(resultado.gematria.synthesis)}
-          interpretacion={getGematriaInterpretation(
-            resultado.gematria.synthesis.finalValue
           )}
         />
       </section>

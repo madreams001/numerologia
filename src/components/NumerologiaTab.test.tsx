@@ -19,17 +19,30 @@ function construirResultado(): NumerologiaResult {
     cumpleanos: 6,
     ciclos: { primero: 9, segundo: 7, tercero: 7 },
     personalYear: 5,
-    expresion: 7,
-    deseoAlma: 3,
-    personalidad: 4,
-    motivacion: 3,
-    intuicion: 0,
-    tendencia: 4,
     retos: calculateChallenges(fecha),
     energias: getDateEnergies(fecha),
     ciclosPersonales: calculatePersonalCycles(fecha, nombre),
     fibonacci: calculateFibonacciCycle(fecha, hoy),
-    gematria: calculateGematria(nombre),
+    registro: {
+      nombreCompleto: 'MARIA GARCIA',
+      expresion: 7,
+      deseoAlma: 3,
+      personalidad: 4,
+      motivacion: 3,
+      intuicion: 0,
+      tendencia: 4,
+      gematria: calculateGematria('MARIA GARCIA'),
+    },
+    uso: {
+      nombreCompleto: 'MARIA',
+      expresion: 5,
+      deseoAlma: 2,
+      personalidad: 3,
+      motivacion: 2,
+      intuicion: 0,
+      tendencia: 1,
+      gematria: calculateGematria('MARIA'),
+    },
   }
 }
 
@@ -86,12 +99,30 @@ describe('NumerologiaTab', () => {
     expect(within(seccion).getByText('Año:')).toBeTruthy()
   })
 
-  it('muestra las interpretaciones textuales junto a los números', () => {
+  it('muestra ambos perfiles de nombre (Registro Civil y Uso diario)', () => {
     render(<NumerologiaTab resultado={construirResultado()} />)
-    const seccion = obtenerSeccion('Gematría')
-    expect(within(seccion).getByText('Vocales:')).toBeTruthy()
-    expect(within(seccion).getByText('Consonantes:')).toBeTruthy()
-    expect(within(seccion).getByText('Síntesis:')).toBeTruthy()
+    const seccion = obtenerSeccion('Comparación por Nombre')
+    expect(within(seccion).getByText('Registro Civil')).toBeTruthy()
+    expect(within(seccion).getByText('Uso diario')).toBeTruthy()
+    expect(within(seccion).getByText('MARIA GARCIA')).toBeTruthy()
+    expect(within(seccion).getByText('MARIA')).toBeTruthy()
+    expect(within(seccion).getAllByText('Expresión:')).toHaveLength(2)
+    expect(within(seccion).getAllByText('Deseo del Alma:')).toHaveLength(2)
+    expect(within(seccion).getAllByText('Personalidad:')).toHaveLength(2)
+    expect(within(seccion).getAllByText('Motivación:')).toHaveLength(2)
+    expect(within(seccion).getAllByText('Tendencia:')).toHaveLength(2)
+    expect(within(seccion).getAllByText('Gematría:')).toHaveLength(2)
+  })
+
+  it('muestra los números de cada perfil por separado', () => {
+    render(<NumerologiaTab resultado={construirResultado()} />)
+    const seccion = obtenerSeccion('Comparación por Nombre')
+    // Registro: Expresión 7, Deseo 3, Personalidad 4
+    expect(within(seccion).getAllByText('7').length).toBeGreaterThanOrEqual(1)
+    expect(within(seccion).getAllByText('3').length).toBeGreaterThanOrEqual(1)
+    // Uso: Expresión 5, Deseo 2, Personalidad 3
+    expect(within(seccion).getAllByText('5').length).toBeGreaterThanOrEqual(1)
+    expect(within(seccion).getAllByText('2').length).toBeGreaterThanOrEqual(1)
   })
 
   it('muestra texto interpretativo del número de vida y de los retos', () => {

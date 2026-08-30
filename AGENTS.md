@@ -20,7 +20,9 @@ App web de cálculos de numerología y astrología. Personal tool, puede abrirse
 - Motivación (todos los nombres)
 - Intuición (segundo nombre / segundo nombre de pila)
 - Tendencia (apellidos)
-- El formulario separa "Nombres" y "Apellidos" en dos campos. Expresión/Deseo/Personalidad/Gematría usan el nombre completo (`nombres + apellidos`); Motivación/Intuición usan `nombres`; Tendencia usa `apellidos`.
+- **Doble perfil de nombre**: el formulario tiene 2 secciones — "Registro Civil" (nombre de nacimiento) y "Uso diario" (cómo lo llaman / se presenta). Cada una con campos separados "Nombres" y "Apellidos".
+- Los cálculos basados en NOMBRE se calculan por separado para cada perfil y se comparan en la UI (sección "Comparación por Nombre"): Expresión/Deseo/Personalidad/Gematría usan el nombre completo del perfil (`nombres + apellidos`); Motivación/Intuición usan los `nombres` del perfil; Tendencia usa los `apellidos` del perfil.
+- Los cálculos basados en FECHA (Vida, Cumpleaños, Ciclos, Año Personal, Retos, Energías, Ciclos Personales, Fibonacci) son ÚNICOS, no se duplican entre perfiles. Gematría muestra la síntesis por perfil.
 - Números maestros: 11, 22, 33 (no se reducen)
 
 ## Cálculos — Astrología
