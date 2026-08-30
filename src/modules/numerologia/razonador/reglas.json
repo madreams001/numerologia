@@ -1,0 +1,86 @@
+{
+  "severidades": {
+    "ALTA": { "etiqueta": "Tensión fuerte" },
+    "MEDIA": { "etiqueta": "Matiz significativo" },
+    "BAJA": { "etiqueta": "Detalle sutil" }
+  },
+  "conflictos": {
+    "pares": [
+      [1, 2],
+      [2, 8],
+      [4, 7],
+      [5, 7],
+      [6, 8]
+    ]
+  },
+  "maestros": [11, 22, 33, 44],
+  "texts": {
+    "refuerzo": {
+      "plantilla": "El número {valor} se repite en {rotulos}: esta repetición {explicacion}",
+      "explicacion": "consolida esa energía y la convierte en uno de tus cimientos más estables. Cuando la vida te demande, vas a poder apoyarte ahí."
+    },
+    "conflicto": {
+      "plantilla": "Hay tensión entre {rotuloA} ({valorA}) y {rotuloB} ({valorB}): {explicacion}",
+      "explicacion": "estas dos energías piden cosas distintas y no siempre conviven cómodas. Integrarlas, en lugar de elegir una sola, es parte de tu trabajo de fondo."
+    },
+    "maestro": {
+      "plantilla": "El número {valor} aparece en {rotulos}. {explicacion}",
+      "explicacionUna": "Es un número maestro: trae un potencial elevado y también la exigencia de canalizarlo con conciencia, porque la maestría no se hereda, se construye.",
+      "explicacionVarias": "Aparece más de una vez en tu mapa, lo que refuerza su llamado: un número maestro que además se repite pide ser mirado de frente, sin esquivarlo."
+    },
+    "reto": {
+      "plantilla": "El {rotuloA} marca un reto {valor} que se apoya justo en tu {rotuloB}. {explicacion}",
+      "explicacion": "Ahí tu energía de nombre ya se esfuerza y la vida suma una prueba extra: resolverlo te deja el aprendizaje más marcado de tu mapa."
+    },
+    "retoFuerte": {
+      "plantilla": "El {rotuloA} marca un reto {valor}. {explicacion}",
+      "explicacion": "Son números altos de reto: señalan una zona donde vas a crecer sí o sí, generalmente aprendiendo a soltar el control o a confiar más en vos."
+    },
+    "coherencia": {
+      "plantilla": "Tu {rotuloA} da {valorA} y tu {rotuloB} da {valorB}: cambia la energía entre un nombre y el otro. {explicacion}",
+      "explicacion": "El nombre que usás todos los días no es neutro: modifica cómo te mostrás y cómo te sentís. Conocer esa diferencia te permite elegir con intención."
+    }
+  },
+  "narrativa": {
+    "secciones": {
+      "tensiones": "Tensiones a integrar",
+      "fortalezas": "Fortalezas que se apoyan entre sí",
+      "maestros": "Números maestros",
+      "coherencia": "Entre tu nombre de registro y tu nombre de uso"
+    },
+    "intros": {
+      "tensiones": "Estos son los puntos donde tus números tiran en direcciones distintas. No son una sentencia, sino el territorio donde más vas a crecer.",
+      "fortalezas": "Estos son los números que se repiten en tu mapa: tu energía ya está consolidada ahí.",
+      "maestros": "Los números maestros marcan un potencial fuera de lo común.",
+      "coherencia": "Estos son los números que cambian cuando pasás de tu nombre de registro al de uso diario."
+    },
+    "prefijos": {
+      "conflicto": { "ALTA": "Tensión fuerte", "otra": "Tensión" },
+      "reto": { "ALTA": "Reto fuerte", "otra": "Reto" },
+      "refuerzo": { "ALTA": "Refuerzo firme", "otra": "Refuerzo" },
+      "maestro": { "ALTA": "Maestro reforzado", "otra": "Número maestro" },
+      "coherencia": { "ALTA": "Cambio marcado", "otra": "Cambio" }
+    },
+    "resumen": {
+      "inicio": "Esta lectura cruza tus números de fecha con los de tus dos nombres para encontrar dónde tu energía se apoya y dónde se tensa.",
+      "tensiones": {
+        "singular": "tensión",
+        "plural": "tensiones",
+        "frase": "Hay {n} {sustantivo} en tu mapa que piden integración: son los puntos donde tus energías tiran para lados distintos."
+      },
+      "refuerzos": {
+        "singular": "repetición firme",
+        "plural": "repeticiones firmes",
+        "frase": "Sumás {n} {sustantivo}: números que se repiten y te dan pisos estables donde apoyarte."
+      },
+      "maestros": {
+        "singular": "número maestro",
+        "plural": "números maestros",
+        "frase": "Sumás {n} {sustantivo}: un potencial fuera de lo común que, bien canalizado, te hace crecer muy por encima del promedio."
+      },
+      "coherencia": "Tus dos nombres no vibran igual: el cambio entre registro y uso dice algo de cómo elegís mostrarte ante el mundo.",
+      "final": "En conjunto, tu mapa se apoya en lo que se repite, se enriquece donde se tensa y se expande en los números maestros: el trabajo de fondo es integrar todas esas voces con tu sello personal.",
+      "equilibrado": "Tu mapa no muestra tensiones dominantes: las energías de fecha y nombre se distribuyen de forma variada y conviven sin pisarse."
+    }
+  }
+}

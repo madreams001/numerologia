@@ -1,5 +1,7 @@
+import { Fragment, useMemo } from 'react'
 import { isMasterNumber } from '../modules/numerologia/calculations'
 import type { NumerologiaResult, PerfilCalculos } from '../modules/numerologia/types'
+import { analizarConsulta } from '../modules/numerologia/razonador'
 import {
   getLifePathInterpretation,
   getBirthdayInterpretation,
@@ -154,6 +156,8 @@ export function NumerologiaTab({ resultado }: NumerologiaTabProps) {
 
   const edadCicloActual =
     ciclosPersonales.currentAge !== undefined ? ciclosPersonales.currentAge : fibonacci.currentAge
+
+  const analisis = useMemo(() => analizarConsulta(resultado), [resultado])
 
   return (
     <div className="resultado-numerologia">
@@ -315,6 +319,28 @@ export function NumerologiaTab({ resultado }: NumerologiaTabProps) {
             resultado.energias.yearEnergy.reducedValue
           )}
         />
+      </section>
+
+      <section className="seccion-numerologia">
+        <h4>Análisis del consultante</h4>
+        <p className="analisis-resumen">
+          {analisis.resumen.split(/\n\s*\n/).map((parrafo, index) => (
+            <Fragment key={index}>
+              {index > 0 && <br />}
+              {parrafo}
+            </Fragment>
+          ))}
+        </p>
+        {analisis.secciones.map((seccion) => (
+          <div key={seccion.titulo} className="analisis-bloque">
+            <h5 className="analisis-titulo">{seccion.titulo}</h5>
+            {seccion.parrafos.map((parrafo, index) => (
+              <p key={index} className="analisis-parrafo">
+                {parrafo}
+              </p>
+            ))}
+          </div>
+        ))}
       </section>
     </div>
   )
