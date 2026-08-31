@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { calculateNatalChart } from '../modules/astrologia/calculations'
-import type { NatalChartResult } from '../modules/astrologia/calculations'
+import { calculateNatalChart, calculateTransits, getAspectNameEs } from '../modules/astrologia/calculations'
+import type { NatalChartResult, TransitResult, ChartInput } from '../modules/astrologia/calculations'
 
 interface AstrologiaTabProps {
   fechaNacimiento: string
@@ -44,42 +44,55 @@ export function AstrologiaTab({ fechaNacimiento, horaNacimiento, lugarNacimiento
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  const [transit, setTransit] = useState<TransitResult | null>(null)
+  const [loadingTransit, setLoadingTransit] = useState(false)
+  const [errorTransit, setErrorTransit] = useState<string | null>(null)
+
+  // Construye el ChartInput de la carta natal a partir de los datos del
+  // formulario. Devuelve null y setea un error si el lugar no se resuelve.
+  const buildChartInput = (): ChartInput | null => {
+    const coords = lugarNacimiento ? resolverCoordenadas(lugarNacimiento) : null
+    if (lugarNacimiento && !coords) {
+      setError(
+        `No se encontraron coordenadas para "${lugarNacimiento}". Prueba con una ciudad principal (Buenos Aires, Córdoba, Madrid, etc.)`,
+      )
+      return null
+    }
+    // Parse the date at local noon (same as App.tsx). "1969-02-07" parsed
+    // as `new Date("1969-02-07")` becomes UTC midnight, which rolls back to
+    // the 6th in UTC-3 zones and shifts the whole chart one day early.
+    const [y, m, d] = fechaNacimiento.split('-').map(Number)
+    const [hora, minuto] = horaNacimiento ? horaNacimiento.split(':').map(Number) : [12, 0]
+    return {
+      year: y,
+      month: m,
+      day: d,
+      hour: hora,
+      minute: minuto,
+      latitude: coords?.lat ?? -34.6037,
+      longitude: coords?.lon ?? -58.3816,
+      // Default UTC-3 (Argentina, fixed year-round since 2018); cities
+      // above carry their own offset (see timeZoneOffset docs).
+      timeZoneOffset: coords?.tz ?? -180,
+    }
+  }
+
   const calcularMapa = async () => {
     if (!fechaNacimiento) {
       setError('Se necesita fecha de nacimiento para el mapa astral.')
       return
     }
 
-    const coords = lugarNacimiento ? resolverCoordenadas(lugarNacimiento) : null
-    if (lugarNacimiento && !coords) {
-      setError(`No se encontraron coordenadas para "${lugarNacimiento}". Prueba con una ciudad principal (Buenos Aires, Córdoba, Madrid, etc.)`)
-      return
-    }
+    const input = buildChartInput()
+    if (!input) return
 
     setLoading(true)
     setError(null)
+    setTransit(null)
+    setErrorTransit(null)
 
     try {
-      // Parse the date at local noon (same as App.tsx). "1969-02-07" parsed
-      // as `new Date("1969-02-07")` becomes UTC midnight, which rolls back to
-      // the 6th in UTC-3 zones and shifts the whole chart one day early.
-      const [y, m, d] = fechaNacimiento.split('-').map(Number)
-      const fecha = new Date(y, m - 1, d, 12)
-      const [hora, minuto] = horaNacimiento ? horaNacimiento.split(':').map(Number) : [12, 0]
-
-      const result = await calculateNatalChart({
-        year: fecha.getFullYear(),
-        month: fecha.getMonth() + 1,
-        day: fecha.getDate(),
-        hour: hora,
-        minute: minuto,
-        latitude: coords?.lat ?? -34.6037,
-        longitude: coords?.lon ?? -58.3816,
-        // Default UTC-3 (Argentina, fixed year-round since 2018); cities
-        // above carry their own offset (see timeZoneOffset docs).
-        timeZoneOffset: coords?.tz ?? -180
-      })
-
+      const result = await calculateNatalChart(input)
       setChart(result)
     } catch (err) {
       setError(`Error al calcular: ${err instanceof Error ? err.message : 'Error desconocido'}`)
@@ -88,10 +101,37 @@ export function AstrologiaTab({ fechaNacimiento, horaNacimiento, lugarNacimiento
     }
   }
 
+  const calcularTransitos = async () => {
+    if (!fechaNacimiento) {
+      setErrorTransit('Se necesita fecha de nacimiento para los tránsitos.')
+      return
+    }
+    // Exige carta natal calculada: los tránsitos se cruzan contra esa carta.
+    if (!chart) {
+      setErrorTransit('Primero calculá tu carta natal.')
+      return
+    }
+
+    const input = buildChartInput()
+    if (!input) return
+
+    setLoadingTransit(true)
+    setErrorTransit(null)
+
+    try {
+      const nuevostransit = await calculateTransits(input, new Date())
+      setTransit(nuevostransit)
+    } catch (err) {
+      setErrorTransit(`Error al calcular: ${err instanceof Error ? err.message : 'Error desconocido'}`)
+    } finally {
+      setLoadingTransit(false)
+    }
+  }
+
   return (
     <div className="resultado-astrologia">
       <h3>Mapa Astral</h3>
-      
+
       {!chart && !loading && (
         <div className="astrologia-placeholder">
           <p>Calcula tu carta natal con los datos que ingresaste.</p>
@@ -149,7 +189,7 @@ export function AstrologiaTab({ fechaNacimiento, horaNacimiento, lugarNacimiento
               <h4>Aspectos Principales</h4>
               {chart.aspects.slice(0, 10).map((aspect, i) => (
                 <div key={i} className="numero-item">
-                  <span className="etiqueta">{aspect.aspect}:</span>
+                  <span className="etiqueta">{getAspectNameEs(aspect.aspect)}:</span>
                   <span className="valor">
                     {aspect.planetA} — {aspect.planetB} (orbe {aspect.orb.toFixed(1)}°)
                   </span>
@@ -157,6 +197,71 @@ export function AstrologiaTab({ fechaNacimiento, horaNacimiento, lugarNacimiento
               ))}
             </div>
           )}
+
+          <div className="chart-section">
+            <h4>Tránsitos Actuales</h4>
+            {!transit && !loadingTransit && (
+              <div>
+                <p className="nota">
+                  Los tránsitos comparan dónde están los planetas hoy contra los de tu carta natal.
+                </p>
+                <button
+                  onClick={calcularTransitos}
+                  className="boton-calcular"
+                  disabled={loadingTransit}
+                >
+                  {loadingTransit ? 'Calculando...' : 'Ver Tránsitos'}
+                </button>
+              </div>
+            )}
+
+            {loadingTransit && (
+              <div className="loading">
+                <p>Calculando tránsitos...</p>
+              </div>
+            )}
+
+            {errorTransit && (
+              <div className="error">
+                <p>{errorTransit}</p>
+              </div>
+            )}
+
+            {transit && (
+              <div>
+                <p className="nota">
+                  Posición planetaria al {transit.transitDate.toLocaleDateString('es-AR')}
+                </p>
+
+                <h5>Planetas en tránsito</h5>
+                {transit.transitPlanets.map((planet) => (
+                  <div key={planet.name} className="numero-item">
+                    <span className="etiqueta">{planet.name}:</span>
+                    <span className="valor">
+                      {planet.sign} {planet.degree}
+                      {planet.retrograde ? ' ℞' : ''}
+                      {planet.house ? ` (Casa ${planet.house} natal)` : ''}
+                    </span>
+                  </div>
+                ))}
+
+                {transit.aspects.length > 0 && (
+                  <>
+                    <h5>Aspectos del tránsito a tu carta</h5>
+                    {transit.aspects.slice(0, 15).map((aspecto, i) => (
+                      <div key={i} className="numero-item">
+                        <span className="etiqueta">{getAspectNameEs(aspecto.aspect)}:</span>
+                        <span className="valor">
+                          {aspecto.transitPlanet} tránsito → {aspecto.natalPlanet} natal (
+                          {aspecto.orb.toFixed(1)}°{aspecto.applying ? ', aplicando' : ''})
+                        </span>
+                      </div>
+                    ))}
+                  </>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>
